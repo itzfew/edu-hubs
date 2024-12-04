@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Countdown with Likes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f3;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        button {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .exam {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+        }
+
+        .exam.expired {
+            background: #f8d7da;
+        }
+
+        .countdown {
+            position: relative;
+            margin: 1em auto;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .countdown::after {
+            content: attr(data-days) " days left";
+            font-weight: bold;
+            font-size: 1.2em;
+            position: absolute;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#28a745 var(--percentage), #eaeaea var(--percentage));
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: background 0.5s;
+        }
+
+        .exam-date {
+            font-style: italic;
+            color: #555;
+        }
+
+        .like-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #007bff;
+            border-radius: 50px;
+            padding: 5px 15px;
+            margin-top: 10px;
+            background-color: white;
+            transition: background-color 0.3s;
+        }
+
+        .like-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 20px;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+
+        .like-button:hover {
+            color: #0056b3;
+        }
+
+        .like-count {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            input, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-pencil-alt"></i> Create an Exam</h1>
+        <form id="examForm">
+            <input type="text" id="examName" placeholder="Name of Exam" required>
+            <input type="date" id="examDate" required>
+            <button type="submit"><i class="fas fa-plus"></i> Submit</button>
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <h2>Upcoming Exams</h2>
+        <div id="examList"></div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCotpjWvQ5cG5cOpgiNvpAS4ftvwKRO_N0",
+            authDomain: "eduhub-a3762.firebaseapp.com",
+            projectId: "eduhub-a3762",
+            storageBucket: "eduhub-a3762.appspot.com",
+            messagingSenderId: "115221366217",
+            appId: "1:115221366217:web:d6cee26ef04752d1519418",
+            measurementId: "G-X1MQF5SR3Z"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Elements
+        const examForm = document.getElementById('examForm');
+        const examList = document.getElementById('examList');
+        const messageDiv = document.getElementById('message');
+
+        // Add Exam
+        examForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const examName = examForm.examName.value;
+            const examDate = new Date(examForm.examDate.value).getTime();
+
+            db.collection('exams').add({
+                name: examName,
+                date: examDate,
+                likes: 0
+            }).then(() => {
+                examForm.reset();
+                showMessage("Exam successfully added!", "success");
+                loadExams();
+            }).catch(error => {
+                showMessage("Error adding exam: " + error.message, "error");
+            });
+        });
+
+        // Load Exams
+        function loadExams() {
+            db.collection('exams').get().then(snapshot => {
+                examList.innerHTML = '';
+                const exams = [];
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    exams.push({ id: doc.id, ...data });
+                });
+
+                // Separate upcoming and expired exams
+                const upcomingExams = exams.filter(exam => exam.date >= Date.now());
+                const expiredExams = exams.filter(exam => exam.date < Date.now());
+
+                // Sort exams
+                upcomingExams.sort((a, b) => a.date - b.date);
+                expiredExams.sort((a, b) => a.date - b.date);
+
+                // Display upcoming exams
+                upcomingExams.forEach(exam => {
+                    const daysLeft = Math.ceil((exam.date - Date.now()) / (1000 * 60 * 60 * 24));
+                    const percentage = (1 - (exam.date - Date.now()) / (exam.date - Date.now() + 1000 * 60 * 60 * 24)) * 100;
+
+                    const examDiv = document.createElement('div');
+                    examDiv.className = 'exam fade-in';
+                    examDiv.innerHTML = `
+                        <h3><i class="fas fa-calendar-check"></i> ${exam.name}</h3>
+                        <div class="countdown" data-days="${daysLeft}">
+                            <div class="circle" style="--percentage: ${percentage}%"></div>
+                        </div>
+                        <p class="exam-date">Date: ${new Date(exam.date).toLocaleDateString()}</p>
+                        <div class="like-container">
+                            <button class="like-button" onclick="likeExam('${exam.id}')"><i class="fas fa-thumbs-up"></i></button>
+                            <div class="like-count">${exam.likes} Likes</div>
+                        </div>
+                    `;
+                    examList.appendChild(examDiv);
+                });
+
+                // Display expired exams
+                expiredExams.forEach(exam => {
+                    const examDiv = document.createElement('div');
+                    examDiv.className = 'exam expired fade-in';
+                    examDiv.innerHTML = `
+                        <h3><i class="fas fa-calendar-times"></i> ${exam.name}</h3>
+                        <div class="countdown" data-days="Expired">
+                            <div class="circle" style="--percentage: 100%"></div>
+                        </div>
+                        <p class="exam-date">Date: ${new Date(exam.date).toLocaleDateString()}</p>
+                        <div class="like-container">
+                            <button class="like-button" onclick="likeExam('${exam.id}')"><i class="fas fa-thumbs-up"></i></button>
+                            <div class="like-count">${exam.likes} Likes</div>
+                        </div>
+                    `;
+                    examList.appendChild(examDiv);
+                });
+            }).catch(error => {
+                console.error("Error getting documents: ", error);
+            });
+        }
+
+        // Like Exam
+        function likeExam(examId) {
+            const examRef = db.collection('exams').doc(examId);
+            examRef.update({
+                likes: firebase.firestore.FieldValue.increment(1)
+            }).then(() => {
+                loadExams(); // Reload to update like count
+            }).catch(error => {
+                console.error("Error liking exam: ", error);
+            });
+        }
+
+        // Show messages
+        function showMessage(msg, type) {
+            messageDiv.textContent = msg;
+            messageDiv.className = 'message ' + (type === 'success' ? 'success' : 'error');
+            messageDiv.style.display = 'block';
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initial load
+        loadExams();
+    </script>
+</body>
+</html>

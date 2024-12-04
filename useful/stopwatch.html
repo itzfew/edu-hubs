@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Management App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .slide {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .time-display {
+            font-size: 6em;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.5);
+            color: white;
+            transform: perspective(500px) rotateX(15deg);
+        }
+
+        button {
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        .controls {
+            margin: 10px 0;
+        }
+
+        input[type="number"] {
+            width: 80px;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+
+        .card {
+            background-color: #17a2b8;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px; 
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            font-size: 1.2em;
+            min-width: 120px; 
+            max-width: 150px; 
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #139cb4; 
+        }
+
+        .card i {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .time-display {
+                font-size: 4em;
+            }
+
+            button {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+            input[type="number"] {
+                width: 60px;
+                font-size: 14px;
+            }
+
+            .card {
+                flex: 1 1 40%; 
+                min-width: 80px; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .time-display {
+                font-size: 3em;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            .card-title {
+                font-size: 0.9em;
+            }
+
+            .card {
+                flex: 1 1 45%; 
+                min-width: 70px; 
+            }
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-message {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Stopwatch Slide -->
+        <div class="slide active" id="stopwatchSlide">
+            <div class="time-display" id="stopwatchDisplay">00:00:00</div>
+            <div class="controls">
+                <button id="toggleStopwatch"><i class="fas fa-play"></i></button>
+                <button id="resetStopwatch"><i class="fas fa-stop"></i></button>
+            </div>
+        </div>
+
+        <!-- Countdown Slide -->
+        <div class="slide" id="countdownSlide">
+            <div class="controls">
+                <input type="number" id="countdownHours" placeholder="Hours" min="0">
+                <input type="number" id="countdownMinutes" placeholder="Minutes" min="0" max="59">
+                <button id="setCountdown"><i class="fas fa-clock"></i></button>
+            </div>
+            <div class="time-display" id="countdownDisplay">00:00:00</div>
+            <div class="controls">
+                <button id="toggleCountdown"><i class="fas fa-play"></i></button>
+                <button id="resetCountdown"><i class="fas fa-stop"></i></button>
+            </div>
+        </div>
+
+        <!-- Current Time Slide -->
+        <div class="slide" id="currentTimeSlide">
+            <div class="time-display" id="currentTimeDisplay">Loading...</div>
+            <div class="controls">
+                <button id="refreshTime"><i class="fas fa-sync"></i></button>
+            </div>
+        </div>
+
+        <!-- 30 Minute Countdown Slide -->
+        <div class="slide" id="thirtyMinCountdownSlide">
+            <div class="time-display" id="thirtyMinCountdownDisplay">30:00</div>
+            <div class="controls">
+                <button id="toggleThirtyMinCountdown"><i class="fas fa-play"></i></button>
+                <button id="resetThirtyMinCountdown"><i class="fas fa-stop"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Navigation -->
+    <div class="card-container">
+        <div class="card" onclick="showSlide(0)">
+            <i class="fas fa-stopwatch"></i>
+            <div class="card-title">Stopwatch</div>
+        </div>
+        <div class="card" onclick="showSlide(1)">
+            <i class="fas fa-hourglass-half"></i>
+            <div class="card-title">Countdown</div>
+        </div>
+        <div class="card" onclick="showSlide(2)">
+            <i class="fas fa-clock"></i>
+            <div class="card-title">Current Time</div>
+        </div>
+        <div class="card" onclick="showSlide(3)">
+            <i class="fas fa-hourglass-start"></i>
+            <div class="card-title">30 Min Countdown</div>
+        </div>
+    </div>
+
+    <!-- Popup for Timer End -->
+    <div class="popup" id="timerPopup">
+        <div class="popup-message">Time's Up!</div>
+        <button id="closePopup">OK</button>
+    </div>
+
+    <audio id="timerSound" src="https://www.soundjay.com/button/sounds/beep-07.wav"></audio>
+
+    <script>
+        let stopwatchTime = 0;
+        let countdownTime = 0;
+        let thirtyMinCountdownTime = 1800; // 30 minutes
+        let stopwatchInterval, countdownInterval, thirtyMinCountdownInterval;
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        // Stopwatch Functions
+        document.getElementById('toggleStopwatch').addEventListener('click', () => {
+            const button = document.getElementById('toggleStopwatch');
+            if (!stopwatchInterval) {
+                stopwatchInterval = setInterval(() => {
+                    stopwatchTime++;
+                    const hours = Math.floor(stopwatchTime / 3600);
+                    const minutes = Math.floor((stopwatchTime % 3600) / 60);
+                    const seconds = stopwatchTime % 60;
+                    document.getElementById('stopwatchDisplay').textContent = 
+                        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }, 1000);
+                button.innerHTML = '<i class="fas fa-pause"></i>'; // Change to pause icon
+            } else {
+                clearInterval(stopwatchInterval);
+                stopwatchInterval = null;
+                button.innerHTML = '<i class="fas fa-play"></i>'; // Change to play icon
+            }
+        });
+
+        document.getElementById('resetStopwatch').addEventListener('click', () => {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+            stopwatchTime = 0;
+            document.getElementById('stopwatchDisplay').textContent = '00:00:00';
+            document.getElementById('toggleStopwatch').innerHTML = '<i class="fas fa-play"></i>'; // Reset to play icon
+        });
+
+        // Countdown Functions
+        document.getElementById('setCountdown').addEventListener('click', () => {
+            const hours = parseInt(document.getElementById('countdownHours').value) || 0;
+            const minutes = parseInt(document.getElementById('countdownMinutes').value) || 0;
+            countdownTime = (hours * 3600) + (minutes * 60); // convert to seconds
+
+            const displayMinutes = Math.floor(countdownTime / 60);
+            const displaySeconds = countdownTime % 60;
+
+            document.getElementById('countdownDisplay').textContent = 
+                `${String(Math.floor(displayMinutes / 60)).padStart(2, '0')}:${String(displayMinutes % 60).padStart(2, '0')}:${String(displaySeconds).padStart(2, '0')}`;
+        });
+
+        document.getElementById('toggleCountdown').addEventListener('click', () => {
+            const button = document.getElementById('toggleCountdown');
+            if (countdownTime > 0 && !countdownInterval) {
+                countdownInterval = setInterval(() => {
+                    if (countdownTime <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                        document.getElementById('timerSound').play(); // Play sound on countdown end
+                        showPopup();
+                    } else {
+                        countdownTime--;
+                        const hours = Math.floor(countdownTime / 3600);
+                        const minutes = Math.floor((countdownTime % 3600) / 60);
+                        const seconds = countdownTime % 60;
+                        document.getElementById('countdownDisplay').textContent = 
+                            `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    }
+                }, 1000);
+                button.innerHTML = '<i class="fas fa-pause"></i>'; // Change to pause icon
+            } else {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+                button.innerHTML = '<i class="fas fa-play"></i>'; // Change to play icon
+            }
+        });
+
+        document.getElementById('resetCountdown').addEventListener('click', () => {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            countdownTime = 0;
+            document.getElementById('countdownDisplay').textContent = '00:00:00';
+            document.getElementById('toggleCountdown').innerHTML = '<i class="fas fa-play"></i>'; // Reset to play icon
+        });
+
+        // Current Time Functions
+        function updateCurrentTime() {
+            const now = new Date();
+            document.getElementById('currentTimeDisplay').textContent = now.toLocaleTimeString();
+        }
+        updateCurrentTime(); // Initial load
+        setInterval(updateCurrentTime, 1000);
+
+        document.getElementById('refreshTime').addEventListener('click', updateCurrentTime);
+
+        // 30 Minute Countdown Functions
+        document.getElementById('toggleThirtyMinCountdown').addEventListener('click', () => {
+            const button = document.getElementById('toggleThirtyMinCountdown');
+            thirtyMinCountdownTime = 1800; // reset to 30 minutes
+            if (!thirtyMinCountdownInterval) {
+                thirtyMinCountdownInterval = setInterval(() => {
+                    if (thirtyMinCountdownTime <= 0) {
+                        clearInterval(thirtyMinCountdownInterval);
+                        thirtyMinCountdownInterval = null;
+                        document.getElementById('timerSound').play(); // Play sound on countdown end
+                        showPopup();
+                    } else {
+                        thirtyMinCountdownTime--;
+                        const minutes = Math.floor(thirtyMinCountdownTime / 60);
+                        const seconds = thirtyMinCountdownTime % 60;
+                        document.getElementById('thirtyMinCountdownDisplay').textContent = 
+                            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    }
+                }, 1000);
+                button.innerHTML = '<i class="fas fa-pause"></i>'; // Change to pause icon
+            } else {
+                clearInterval(thirtyMinCountdownInterval);
+                thirtyMinCountdownInterval = null;
+                button.innerHTML = '<i class="fas fa-play"></i>'; // Change to play icon
+            }
+        });
+
+        document.getElementById('resetThirtyMinCountdown').addEventListener('click', () => {
+            clearInterval(thirtyMinCountdownInterval);
+            thirtyMinCountdownInterval = null;
+            thirtyMinCountdownTime = 1800; // reset to 30 minutes
+            document.getElementById('thirtyMinCountdownDisplay').textContent = '30:00';
+            document.getElementById('toggleThirtyMinCountdown').innerHTML = '<i class="fas fa-play"></i>'; // Reset to play icon
+        });
+
+        // Popup Functions
+        function showPopup() {
+            document.getElementById('timerPopup').classList.add('active');
+        }
+
+        document.getElementById('closePopup').addEventListener('click', () => {
+            document.getElementById('timerPopup').classList.remove('active');
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

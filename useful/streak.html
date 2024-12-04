@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Streak Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1c1c1c;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: allow;
+    }
+
+    h1 {
+      font-size: 1rem;
+      color: #ff5722;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 10px rgba(255, 87, 34, 0.8);
+    }
+
+    .streak {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #ff9800;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(255, 152, 0, 0.7);
+    }
+
+    .message {
+      font-size: 1.1rem;
+      color: #ffcc00;
+      text-align: center;
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 10px rgba(255, 193, 7, 0.7);
+    }
+
+    .day-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .day-circle {
+      width: 50px;
+      height: 50px;
+      background-color: #ff5722;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+    }
+
+    .day-circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 87, 34, 1);
+    }
+
+    .marked {
+      background-color: #ff9800;
+    }
+
+    .current-day {
+      background-color: #ffcc00;
+    }
+
+    .marked-today {
+      background-color: #ff4081;
+    }
+
+    .button {
+      padding: 14px 25px;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, #ff5722, #ff9800);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(255, 87, 34, 0.5);
+    }
+
+    .button:disabled {
+      background: linear-gradient(45deg, #bdbdbd, #9e9e9e);
+      cursor: not-allowed;
+    }
+
+    .button:hover {
+      background: linear-gradient(45deg, #ff9800, #ff5722);
+      transform: scale(1.05);
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #444;
+      border-radius: 10px;
+      height: 8px;
+      margin-top: 10px;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: #ff5722;
+      border-radius: 10px;
+    }
+
+    .completed .progress {
+      background-color: #ff9800;
+    }
+
+    .target-item {
+      background-color: #2c2c2c;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: white;
+    }
+
+    .target-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(255, 87, 34, 0.6);
+    }
+
+    .target-item i {
+      color: #ff5722;
+      font-size: 24px;
+      display: none;
+    }
+
+    .completed i {
+      display: inline-block;
+    }
+
+    .target-item span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ff5722;
+    }
+
+    .target-item .progress-bar {
+      margin-top: 10px;
+    }
+
+    .target-message {
+      font-size: 1rem;
+      color: #ff9800;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(255, 152, 0, 0.6);
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .streak {
+        font-size: 1.7rem;
+      }
+
+      .day-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+      }
+
+      .target-item {
+        font-size: 0.9rem;
+        padding: 15px;
+      }
+
+      .button {
+        font-size: 1rem;
+        padding: 12px 18px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .day-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 11px;
+      }
+
+      .button {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+      }
+    }
+    #targetList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px; /* Optional: Add some padding for spacing */
+  box-sizing: border-box;
+}
+
+.target-item {
+  width: 100%;
+  max-width: 500px; /* Ensure they don't grow too large on wide screens */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+}
+
+.target-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(255, 87, 34, 0.6);
+}
+
+/* Optional: Add a margin for responsiveness */
+@media screen and (max-width: 768px) {
+  .target-item {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .target-item {
+    padding: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Study Streak Tracker</h1>
+  <div id="currentDate"></div>
+  <div class="streak" id="streak">Streak: <span id="streakCount">0</span></div>
+  <div class="message" id="message"></div>
+  <div class="target-message" id="nextTargetMessage"></div>
+  <div class="day-container" id="dayContainer"></div>
+  <button id="clickButton" class="button">Complete Today's Goal</button>
+  <div id="targetList"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const today = new Date();
+      const todayDay = today.getDay();
+      const todayDate = today.toLocaleDateString();
+      const dayContainer = document.getElementById('dayContainer');
+      const targetList = document.getElementById('targetList');
+      const nextTargetMessage = document.getElementById('nextTargetMessage');
+
+      document.getElementById('currentDate').innerText = `Today: ${today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`;
+
+      // Creating day circles for the week
+      for (let i = 0; i < daysOfWeek.length; i++) {
+        const dayCircle = document.createElement('div');
+        dayCircle.classList.add('day-circle');
+
+        if (i < todayDay) {
+          dayCircle.innerText = daysOfWeek[i];
+          dayCircle.classList.add('marked');
+        } else if (i === todayDay) {
+          dayCircle.innerText = daysOfWeek[i];
+          dayCircle.classList.add('current-day');
+        } else {
+          dayCircle.innerText = daysOfWeek[i];
+        }
+
+        if (i === todayDay && localStorage.getItem('lastClickedTimestamp') === todayDate) {
+          dayCircle.classList.add('marked-today');
+        }
+
+        dayContainer.appendChild(dayCircle);
+      }
+
+      let streak = parseInt(localStorage.getItem('streak')) || 0;
+      document.getElementById('streakCount').innerText = streak;
+
+      const lastClickedTimestamp = localStorage.getItem('lastClickedTimestamp');
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayDate = yesterday.toLocaleDateString();
+
+      if (lastClickedTimestamp && lastClickedTimestamp === todayDate) {
+        document.getElementById('clickButton').disabled = true;
+        document.getElementById('message').innerText = "You have already completed today's goal!";
+      } else {
+        if (lastClickedTimestamp && lastClickedTimestamp !== yesterdayDate) {
+          streak = 0;
+          localStorage.setItem('streak', streak);
+        }
+        document.getElementById('clickButton').disabled = false;
+      }
+
+      document.getElementById('clickButton').addEventListener('click', function() {
+        streak++;
+        document.getElementById('streakCount').innerText = streak;
+        localStorage.setItem('lastClickedTimestamp', todayDate);
+        localStorage.setItem('streak', streak);
+        document.getElementById('clickButton').disabled = true;
+        document.getElementById('message').innerText = "You have completed today's goal!";
+        updateProgress();
+      });
+
+      function updateProgress() {
+        const targets = [7, 15, 30, 75, 90]; // Example target days
+        targetList.innerHTML = '';
+
+        let nextTarget = targets.find(targetDays => streak < targetDays);
+        let nextTargetDays = nextTarget || targets[targets.length - 1];
+
+        targets.forEach(targetDays => {
+          const progress = Math.min(100, (streak / targetDays) * 100);
+          const completed = streak >= targetDays;
+
+          const targetItem = document.createElement('div');
+          targetItem.classList.add('target-item');
+          if (completed) {
+            targetItem.classList.add('completed');
+          }
+
+          targetItem.innerHTML = `
+            ${completed ? '<i class="fas fa-check"></i>' : ''}
+            Target: ${targetDays} days
+            <div class="progress-bar">
+              <div class="progress" style="width: ${progress}%;"></div>
+            </div>
+          `;
+
+          targetList.appendChild(targetItem);
+        });
+
+        updateNextTargetMessage(nextTargetDays);
+      }
+
+      function updateNextTargetMessage(nextTargetDays) {
+        if (nextTargetDays) {
+          const streaksLeft = nextTargetDays - streak;
+          if (streaksLeft > 0) {
+            nextTargetMessage.innerText = `Keep going! ${streaksLeft} streaks left to reach ${nextTargetDays} days target.`;
+          } else {
+            nextTargetMessage.innerText = `Congratulations! You've reached the ${nextTargetDays} days target!`;
+          }
+        }
+      }
+
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

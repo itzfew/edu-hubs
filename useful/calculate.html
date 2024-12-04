@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced 3D Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .calculator {
+            background: linear-gradient(135deg, #ffffff, #cfd8dc);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 360px;
+            overflow: hidden;
+            transition: transform 0.5s;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .display {
+            background: #424242;
+            color: #fff;
+            font-size: 2.5em;
+            padding: 20px;
+            text-align: right;
+            border: 2px solid #ff7043;
+            border-radius: 10px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 10px;
+            margin: 5px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .operator {
+            background: #ff7043;
+            color: #fff;
+        }
+
+        .operator:hover {
+            background: #f4511e;
+        }
+
+        .clear {
+            background: #d32f2f;
+            color: #fff;
+        }
+
+        .clear:hover {
+            background: #c62828;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+
+        .conversion-section {
+            padding: 20px;
+            background: #ffffff;
+            border: 2px solid #ff7043;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        select, input {
+            width: calc(100% - 10px);
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        #conversion-result {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .switch-button {
+            padding: 10px;
+            border: none;
+            background-color: #ff7043;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background 0.3s;
+        }
+
+        .switch-button:hover {
+            background-color: #f4511e;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator" id="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="btn clear" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn operator" onclick="appendToDisplay('/')">/</button>
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn operator" onclick="appendToDisplay('*')">*</button>
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn operator" onclick="appendToDisplay('-')">-</button>
+            <button class="btn zero" onclick="appendToDisplay('0')">0</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+            <button class="btn operator" onclick="calculateResult()">=</button>
+            <button class="btn operator" onclick="appendToDisplay('+')">+</button>
+            <button class="btn operator" onclick="calculateSin()">sin</button>
+            <button class="btn operator" onclick="calculateCos()">cos</button>
+            <button class="btn operator" onclick="calculateTan()">tan</button>
+        </div>
+        <button class="switch-button" onclick="showConversions()">Conversions</button>
+    </div>
+
+    <div class="calculator hidden" id="conversion-calculator">
+        <div class="conversion-section">
+            <h3>Conversions</h3>
+            <select id="conversion-type" onchange="updateConversionFields()">
+                <option value="length">Length</option>
+                <option value="time">Time</option>
+                <option value="area">Area</option>
+                <option value="volume">Volume</option>
+            </select>
+            <input type="number" id="input-value" placeholder="Value" />
+            <select id="unit-from"></select>
+            <select id="unit-to"></select>
+            <button class="btn operator" onclick="convert()">Convert</button>
+            <div id="conversion-result"></div>
+        </div>
+        <button class="switch-button" onclick="showCalculator()">Back to Calculator</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        const conversionTypes = {
+            length: { units: ['m', 'cm', 'in', 'mm', 'km'], factor: [1, 0.01, 0.0254, 0.001, 1000] },
+            time: { units: ['s', 'min', 'h'], factor: [1, 60, 3600] },
+            area: { units: ['m²', 'cm²', 'km²'], factor: [1, 0.0001, 1000000] },
+            volume: { units: ['L', 'mL', 'cm³'], factor: [1, 0.001, 0.001] },
+        };
+
+        function appendToDisplay(value) {
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+            document.getElementById('conversion-result').innerText = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+
+        function calculateSin() {
+            const angle = parseFloat(display.innerText);
+            const result = Math.sin(angle * (Math.PI / 180)); // Convert degrees to radians
+            display.innerText = result.toFixed(4);
+        }
+
+        function calculateCos() {
+            const angle = parseFloat(display.innerText);
+            const result = Math.cos(angle * (Math.PI / 180)); // Convert degrees to radians
+            display.innerText = result.toFixed(4);
+        }
+
+        function calculateTan() {
+            const angle = parseFloat(display.innerText);
+            const result = Math.tan(angle * (Math.PI / 180)); // Convert degrees to radians
+            display.innerText = result.toFixed(4);
+        }
+
+        function showConversions() {
+            document.getElementById('calculator').classList.add('hidden');
+            document.getElementById('conversion-calculator').classList.remove('hidden');
+            updateConversionFields();
+        }
+
+        function showCalculator() {
+            document.getElementById('conversion-calculator').classList.add('hidden');
+            document.getElementById('calculator').classList.remove('hidden');
+        }
+
+        function updateConversionFields() {
+            const type = document.getElementById('conversion-type').value;
+            const unitFromSelect = document.getElementById('unit-from');
+            const unitToSelect = document.getElementById('unit-to');
+
+            unitFromSelect.innerHTML = '';
+            unitToSelect.innerHTML = '';
+
+            conversionTypes[type].units.forEach(unit => {
+                unitFromSelect.innerHTML += `<option value="${unit}">${unit}</option>`;
+                unitToSelect.innerHTML += `<option value="${unit}">${unit}</option>`;
+            });
+        }
+
+        function convert() {
+            const type = document.getElementById('conversion-type').value;
+            const value = parseFloat(document.getElementById('input-value').value);
+            const fromUnit = document.getElementById('unit-from').value;
+            const toUnit = document.getElementById('unit-to').value;
+
+            if (isNaN(value)) {
+                document.getElementById('conversion-result').innerText = 'Please enter a valid number';
+                return;
+            }
+
+            const fromIndex = conversionTypes[type].units.indexOf(fromUnit);
+            const toIndex = conversionTypes[type].units.indexOf(toUnit);
+
+            const result = value * (conversionTypes[type].factor[fromIndex] / conversionTypes[type].factor[toIndex]);
+            document.getElementById('conversion-result').innerText = `Result: ${result.toFixed(2)} ${toUnit}`;
+        }
+
+        // Initialize the unit fields
+        updateConversionFields();
+    </script>
+</body>
+</html>

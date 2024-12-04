@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Equations Calculator</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin: 10px 0;
+            color: #555;
+        }
+        .slide-container {
+            display: none;
+        }
+        .slide-container.active {
+            display: block;
+        }
+        input {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #4CAF50;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 10px;
+            width: 30%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .buttons button:hover {
+            opacity: 0.9;
+        }
+        .prev { background-color: #2196F3; }
+        .next { background-color: #FF5722; }
+        .calculate { background-color: #4CAF50; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Newton's Equations Calculator</h2>
+
+        <!-- Slide 1: First Equation -->
+        <div class="slide-container active" id="slide1">
+            <h3>First Equation: \( v = u + at \)</h3>
+            <input type="number" id="u1" placeholder="Initial Velocity (u)">
+            <input type="number" id="a1" placeholder="Acceleration (a)">
+            <input type="number" id="t1" placeholder="Time (t)">
+            <input type="number" id="v1" placeholder="Final Velocity (v)">
+            <button class="calculate" onclick="calculateFirst()">Calculate</button>
+            <p class="result" id="result1"></p>
+        </div>
+
+        <!-- Slide 2: Second Equation -->
+        <div class="slide-container" id="slide2">
+            <h3>Second Equation: \( s = ut + \frac{1}{2} a t^2 \)</h3>
+            <input type="number" id="u2" placeholder="Initial Velocity (u)">
+            <input type="number" id="a2" placeholder="Acceleration (a)">
+            <input type="number" id="t2" placeholder="Time (t)">
+            <input type="number" id="s2" placeholder="Displacement (s)">
+            <button class="calculate" onclick="calculateSecond()">Calculate</button>
+            <p class="result" id="result2"></p>
+        </div>
+
+        <!-- Slide 3: Third Equation -->
+        <div class="slide-container" id="slide3">
+            <h3>Third Equation: \( v^2 = u^2 + 2as \)</h3>
+            <input type="number" id="u3" placeholder="Initial Velocity (u)">
+            <input type="number" id="a3" placeholder="Acceleration (a)">
+            <input type="number" id="s3" placeholder="Displacement (s)">
+            <input type="number" id="v3" placeholder="Final Velocity (v)">
+            <button class="calculate" onclick="calculateThird()">Calculate</button>
+            <p class="result" id="result3"></p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button class="prev" onclick="prevSlide()">Previous</button>
+            <button class="next" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+
+        function showSlide(n) {
+            document.querySelectorAll('.slide-container').forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide${n}`).classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = currentSlide < 3 ? currentSlide + 1 : 1;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = currentSlide > 1 ? currentSlide - 1 : 3;
+            showSlide(currentSlide);
+        }
+
+        function calculateFirst() {
+            const u = parseFloat(document.getElementById("u1").value);
+            const a = parseFloat(document.getElementById("a1").value);
+            const t = parseFloat(document.getElementById("t1").value);
+            const v = parseFloat(document.getElementById("v1").value);
+
+            let resultText;
+            if (isNaN(v)) {
+                resultText = `Final Velocity (v) = ${(u + a * t).toFixed(2)} m/s`;
+                document.getElementById("result1").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Using the equation \( v = u + at \), we substitute the known values:</p>
+                    <p>\\( v = ${u} + ${a} \times ${t} \\)</p>
+                    <p>\\( v = ${(u + a * t).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(u)) {
+                resultText = `Initial Velocity (u) = ${(v - a * t).toFixed(2)} m/s`;
+                document.getElementById("result1").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v = u + at \), we solve for \( u \):</p>
+                    <p>\\( u = v - at \\)</p>
+                    <p>\\( u = ${v} - ${a} \times ${t} \\)</p>
+                    <p>\\( u = ${(v - a * t).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(a)) {
+                resultText = `Acceleration (a) = ${((v - u) / t).toFixed(2)} m/s²`;
+                document.getElementById("result1").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v = u + at \), we solve for \( a \):</p>
+                    <p>\\( a = \\frac{v - u}{t} \\)</p>
+                    <p>\\( a = \\frac{${v} - ${u}}{${t}} \\)</p>
+                    <p>\\( a = ${(v - u) / t} \\)</p>
+                `;
+            } else if (isNaN(t)) {
+                resultText = `Time (t) = ${((v - u) / a).toFixed(2)} s`;
+                document.getElementById("result1").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v = u + at \), we solve for \( t \):</p>
+                    <p>\\( t = \\frac{v - u}{a} \\)</p>
+                    <p>\\( t = \\frac{${v} - ${u}}{${a}} \\)</p>
+                    <p>\\( t = ${(v - u) / a} \\)</p>
+                `;
+            }
+            MathJax.typeset();
+        }
+
+        function calculateSecond() {
+            const u = parseFloat(document.getElementById("u2").value);
+            const a = parseFloat(document.getElementById("a2").value);
+            const t = parseFloat(document.getElementById("t2").value);
+            const s = parseFloat(document.getElementById("s2").value);
+
+            let resultText;
+            if (isNaN(s)) {
+                resultText = `Displacement (s) = ${(u * t + 0.5 * a * t * t).toFixed(2)} m`;
+                document.getElementById("result2").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Using the equation \( s = ut + \frac{1}{2} a t^2 \), we substitute the known values:</p>
+                    <p>\\( s = ${u} \\times ${t} + \\frac{1}{2} \\times ${a} \\times ${t}^2 \\)</p>
+                    <p>\\( s = ${(u * t + 0.5 * a * t * t).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(u)) {
+                resultText = `Initial Velocity (u) = ${(s / t - 0.5 * a * t).toFixed(2)} m/s`;
+                document.getElementById("result2").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( s = ut + \frac{1}{2} a t^2 \), we solve for \( u \):</p>
+                    <p>\\( u = \\frac{s}{t} - \\frac{1}{2} a t \\)</p>
+                    <p>\\( u = ${(s / t - 0.5 * a * t).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(a)) {
+                resultText = `Acceleration (a) = ${(2 * (s - u * t) / (t * t)).toFixed(2)} m/s²`;
+                document.getElementById("result2").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( s = ut + \frac{1}{2} a t^2 \), we solve for \( a \):</p>
+                    <p>\\( a = \\frac{2(s - ut)}{t^2} \\)</p>
+                    <p>\\( a = ${(2 * (s - u * t) / (t * t)).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(t)) {
+                resultText = `Time (t) = ${Math.sqrt(2 * (s - u * t) / a).toFixed(2)} s`;
+                document.getElementById("result2").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( s = ut + \frac{1}{2} a t^2 \), we solve for \( t \):</p>
+                    <p>\\( t = \\sqrt{\\frac{2(s - ut)}{a}} \\)</p>
+                    <p>\\( t = ${Math.sqrt(2 * (s - u * t) / a).toFixed(2)} \\)</p>
+                `;
+            }
+            MathJax.typeset();
+        }
+
+        function calculateThird() {
+            const u = parseFloat(document.getElementById("u3").value);
+            const a = parseFloat(document.getElementById("a3").value);
+            const s = parseFloat(document.getElementById("s3").value);
+            const v = parseFloat(document.getElementById("v3").value);
+
+            let resultText;
+            if (isNaN(v)) {
+                resultText = `Final Velocity (v) = ${Math.sqrt(u * u + 2 * a * s).toFixed(2)} m/s`;
+                document.getElementById("result3").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Using the equation \( v^2 = u^2 + 2as \), we substitute the known values:</p>
+                    <p>\\( v^2 = ${u}^2 + 2 \\times ${a} \\times ${s} \\)</p>
+                    <p>\\( v = ${Math.sqrt(u * u + 2 * a * s).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(u)) {
+                resultText = `Initial Velocity (u) = ${Math.sqrt(v * v - 2 * a * s).toFixed(2)} m/s`;
+                document.getElementById("result3").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v^2 = u^2 + 2as \), we solve for \( u \):</p>
+                    <p>\\( u = \\sqrt{v^2 - 2as} \\)</p>
+                    <p>\\( u = ${Math.sqrt(v * v - 2 * a * s).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(a)) {
+                resultText = `Acceleration (a) = ${(v * v - u * u) / (2 * s).toFixed(2)} m/s²`;
+                document.getElementById("result3").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v^2 = u^2 + 2as \), we solve for \( a \):</p>
+                    <p>\\( a = \\frac{v^2 - u^2}{2s} \\)</p>
+                    <p>\\( a = ${(v * v - u * u) / (2 * s).toFixed(2)} \\)</p>
+                `;
+            } else if (isNaN(s)) {
+                resultText = `Displacement (s) = ${(v * v - u * u) / (2 * a).toFixed(2)} m`;
+                document.getElementById("result3").innerHTML = `
+                    <p><strong>Solution:</strong></p>
+                    <p>Rearranging the equation \( v^2 = u^2 + 2as \), we solve for \( s \):</p>
+                    <p>\\( s = \\frac{v^2 - u^2}{2a} \\)</p>
+                    <p>\\( s = ${(v * v - u * u) / (2 * a).toFixed(2)} \\)</p>
+                `;
+            }
+            MathJax.typeset();
+        }
+    </script>
+</body>
+</html>
