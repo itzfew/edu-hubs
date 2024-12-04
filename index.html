@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Hub - Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #444;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        #utility-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .button-card {
+            text-align: center;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #444;
+        }
+
+        .btn-card {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .btn-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .blog-post {
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px #444;
+        }
+
+        .blog-post h2 {
+            margin: 0 0 10px;
+        }
+
+        .blog-post p {
+            margin: 0 0 15px;
+        }
+
+        .footer {
+            background: #111;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 2px solid #444;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Edu Hub</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#utility-buttons">Utilities</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="utility-buttons">
+        <div class="button-card">
+            <a href="useful/omr.html" class="btn-card"><i class="fas fa-clipboard"></i> OMR Sheet</a>
+        </div>
+        <div class="button-card">
+            <a href="useful/calculate.html" class="btn-card"><i class="fas fa-calculator"></i> Calculator</a>
+        </div>
+        <div class="button-card">
+            <a href="useful/stopwatch.html" class="btn-card"><i class="fas fa-stopwatch"></i> Stopwatch</a>
+        </div>
+        <div class="button-card">
+            <a href="useful/streak.html" class="btn-card"><i class="fas fa-calendar-check"></i> Streak Tracker</a>
+        </div>
+        <div class="button-card">
+            <a href="useful/Countdown.html" class="btn-card"><i class="fas fa-clock"></i> Countdown Exams</a>
+        </div>
+        <div class="button-card">
+            <a href="useful/periodic-table.html" class="btn-card"><i class="fas fa-pen"></i> Periodic Table</a>
+        </div>
+    </section>
+
+    <section class="blog-section" id="blog">
+        <h2>Latest Posts</h2>
+        <div class="blog-post">
+            <h2>How to Prepare for NEET Effectively</h2>
+            <p>Discover tips and strategies to maximize your NEET preparation.</p>
+            <a href="#" class="btn-card"><i class="fas fa-book"></i> Read More</a>
+        </div>
+        <div class="blog-post">
+            <h2>Top Resources for JEE Aspirants</h2>
+            <p>Explore the best resources and study material for cracking JEE.</p>
+            <a href="#" class="btn-card"><i class="fas fa-book"></i> Read More</a>
+        </div>
+        <div class="blog-post">
+            <h2>Study Tips for Class 11 & 12</h2>
+            <p>Learn how to manage your time and excel in school exams.</p>
+            <a href="#" class="btn-card"><i class="fas fa-book"></i> Read More</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Edu Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>
