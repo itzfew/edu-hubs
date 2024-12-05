@@ -91,7 +91,7 @@
 <script>
     // Function to fetch and parse the RSS feed
     async function fetchRSS() {
-        const rssUrl = 'https://edu-hubs.pages.dev/rssa.xml'; // RSS feed URL
+        const rssUrl = 'https://edu-hubs.pages.dev/rss.xml'; // RSS feed URL
         const response = await fetch(rssUrl);
         const text = await response.text();
         const parser = new DOMParser();
