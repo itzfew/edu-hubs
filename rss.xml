@@ -1,0 +1,68 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>STUDY MATERIAL</title>
+    <description>Latest updates and news for my app.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Dec 2024 12:30:00 GMT</lastBuildDate>
+
+    <item>
+      <title>Khud Pe YAKEEN - Official Song - NEET 2024 Dropper</title>
+      <link>https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4</link>
+      <description>Motivational song for NEET 2025 Dropper by Alakh Sir of Physics Wallah.</description>
+      <pubDate>Mon, 25 Dec 2024 23:00:00 +0000</pubDate>
+      <enclosure url="https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4" type="audio/mp4"/>
+      <guid>khud-pe-yakeen-official-song-neet-2025-dropper</guid>
+    </item>
+
+    <item>
+      <title>Study Material APP Update</title>
+      <description>
+        <![CDATA[
+        <h3>The latest update for the Study Material APK brings new features and improvements. Below are the details of the update and the available versions for download:</h3>
+
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+          <tr>
+            <th colspan="2" style="text-align: center; background-color: #4CAF50; color: white;">Study Material APK Update Details</th>
+          </tr>
+          <tr>
+            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">Latest Version:</td>
+            <td>
+              <a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v2.apk" 
+                 style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;"
+                 target="_blank">Download Latest Version</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">Previous Versions:</td>
+            <td>
+              <button onclick="toggleVersionList()" style="padding: 5px 10px; background-color: #FF9800; color: white; border: none; border-radius: 5px; cursor: pointer;">View All Versions</button>
+              <ul id="versionList" style="list-style: none; padding: 0; display: none; margin-top: 10px;">
+                <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v1.apk" target="_blank">Version 1 - Initial release with basic study materials</a></li>
+                <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v2.apk" target="_blank">Version 2 - Added more features and more tests</a></li>
+                <li><a href="#" target="_blank">Version 3 - Coming soon</a></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">App Icon:</td>
+            <td>
+              <img src="https://edu-hubs.pages.dev/img/logo.png" alt="App Icon" style="max-width: 150px; border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
+            </td>
+          </tr>
+        </table>
+
+        <script>
+          function toggleVersionList() {
+            const versionList = document.getElementById('versionList');
+            versionList.style.display = versionList.style.display === 'none' ? 'block' : 'none';
+          }
+        </script>
+        ]]>
+      </description>
+      <pubDate>Mon, 25 Dec 2024 11:40:00 GMT</pubDate>
+      <guid>study-material-apk-update</guid>
+    </item>
+
+  </channel>
+</rss>

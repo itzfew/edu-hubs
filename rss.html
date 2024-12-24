@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS Feed Preview with Dynamic Slides</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .rss-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .post {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .post:hover {
+            transform: translateY(-5px);
+        }
+        .post h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .post p {
+            font-size: 14px;
+            color: #555;
+        }
+        .post a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+        .slide {
+            display: none;
+            transition: transform 0.3s ease-in-out;
+        }
+        .active-slide {
+            display: block;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>RSS Feed Preview with Dynamic Slides</h1>
+    <p>Click on a title to view the details</p>
+</header>
+
+<div class="rss-feed" id="rss-feed-container">
+    <!-- List of titles will be displayed here -->
+</div>
+
+<div class="slides-container" id="slides-container">
+    <!-- Detailed slides will be displayed here dynamically -->
+</div>
+
+<script>
+    // Function to fetch and parse the RSS feed
+    async function fetchRSS() {
+        const rssUrl = 'https://edu-hubs.pages.dev/rss.xml'; // RSS feed URL
+        const response = await fetch(rssUrl);
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+
+        const items = xml.querySelectorAll('item'); // Get all items from the RSS feed
+        const feedContainer = document.getElementById('rss-feed-container');
+        const slidesContainer = document.getElementById('slides-container');
+        
+        // Loop through each item and create HTML content for list and slides
+        items.forEach((item, index) => {
+            const title = item.querySelector('title').textContent;
+            const description = item.querySelector('description').textContent;
+            const link = item.querySelector('link') ? item.querySelector('link').textContent : '#';
+            const pubDate = item.querySelector('pubDate').textContent;
+
+            // Create a list item for the RSS feed showing only the title
+            const postDiv = document.createElement('div');
+            postDiv.classList.add('post');
+            postDiv.dataset.index = index;
+            postDiv.innerHTML = `
+                <h3>${title}</h3>
+            `;
+            
+            // Add click event to show the corresponding slide
+            postDiv.addEventListener('click', () => showSlide(index));
+
+            feedContainer.appendChild(postDiv);
+
+            // Create a detailed slide for each post
+            const slideDiv = document.createElement('div');
+            slideDiv.classList.add('slide');
+            slideDiv.id = `slide-${index}`;
+            slideDiv.innerHTML = `
+                <h2>${title}</h2>
+                <p><strong>Published on:</strong> ${new Date(pubDate).toLocaleDateString()}</p>
+                <p>${description}</p>
+            `;
+
+            slidesContainer.appendChild(slideDiv);
+        });
+    }
+
+    // Function to show a specific slide and hide everything else
+    function showSlide(index) {
+        // Hide all other content (posts and slides)
+        document.getElementById('rss-feed-container').style.display = 'none';
+        const slides = document.querySelectorAll('.slide');
+        slides.forEach(slide => slide.classList.remove('active-slide'));
+        
+        // Show the selected slide
+        const activeSlide = document.getElementById(`slide-${index}`);
+        activeSlide.classList.add('active-slide');
+        
+        // Also show the slide container if hidden
+        document.getElementById('slides-container').style.display = 'block';
+    }
+
+    // Call the fetchRSS function to load the RSS feed
+    fetchRSS();
+</script>
+
+</body>
+</html>
