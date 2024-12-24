@@ -5,7 +5,14 @@
     <description>Latest updates and news for my app.</description>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2024 12:30:00 GMT</lastBuildDate>
-
+<item>
+  <title>NEET 2025 Syllabus</title>
+  <link>https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf</link>
+  <description>Download the official NEET 2025 syllabus to prepare for your exams. Source: nmc.org.in</description>
+  <pubDate>Tue, 25 Dec 2024 17:00:00 GMT</pubDate>
+  <enclosure url="https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf" type="application/pdf"/>
+  <guid>neet-2025-syllabus</guid>
+</item>
     <item>
       <title>Khud Pe YAKEEN - Official Song - NEET 2024 Dropper</title>
       <link>https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4</link>
