@@ -27,7 +27,7 @@
           <tr>
             <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">Latest Version:</td>
             <td>
-              <a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v2.apk" 
+              <a href="https://itzfew.github.io/edu-hubs/Apk/Com_studymaterial_app_v3.apk" 
                  style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;"
                  target="_blank">Download Latest Version</a>
             </td>
@@ -39,7 +39,7 @@
               <ul id="versionList" style="list-style: none; padding: 0; display: none; margin-top: 10px;">
                 <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v1.apk" target="_blank">Version 1 - Initial release with basic study materials</a></li>
                 <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v2.apk" target="_blank">Version 2 - Added more features and more tests</a></li>
-                <li><a href="#" target="_blank">Version 3 - Coming soon</a></li>
+                <li><a href="https://itzfew.github.io/edu-hubs/Apk/Com_studymaterial_app_v3.apk" target="_blank">Version 3 - new update</a></li>
               </ul>
             </td>
           </tr>
