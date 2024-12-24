@@ -5,6 +5,17 @@
     <description>Latest updates and news for my app.</description>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2024 12:30:00 GMT</lastBuildDate>
+
+<item>
+  <title>Update Study Material App via Telegram</title>
+  <link>https://t.me/FREESTUDYApp</link>
+  <description>Stay up-to-date with the latest versions of the Study Material App by joining our Telegram group. 
+        Get notifications for new updates and download the app directly from our group. Click on the link to join: </description>
+  <pubDate>Tue, 25 Dec 2025 17:00:00 GMT</pubDate>
+  <enclosure url="https://t.me/FREESTUDYApp" type="application/view"/>
+  <guid>update-app-via-telegram</guid>
+</item>
+    
 <item>
   <title>NEET 2025 Syllabus</title>
   <link>https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf</link>
@@ -13,6 +24,7 @@
   <enclosure url="https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf" type="application/pdf"/>
   <guid>neet-2025-syllabus</guid>
 </item>
+    
     <item>
       <title>Khud Pe YAKEEN - Official Song - NEET 2024 Dropper</title>
       <link>https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4</link>
