@@ -4,8 +4,84 @@
     <title>STUDY MATERIAL</title>
     <description>Latest updates and news for my app.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Dec 2024 12:30:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 25 Dec 2024 12:00:00 GMT</lastBuildDate>
+<!-- Single Item for All Exams -->
+    <item>
+      <guid>pyqs-of-all-exams</guid>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 GMT</pubDate>
+      <description>
+        <![CDATA[
+        <div style="text-align: center; padding: 20px;">
+          <button onclick="window.location.href='https://itzfew.github.io/Quizes/'" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">
+            Start Quiz
+          </button>
+        </div>
 
+        <h3>Complete Exam List</h3>
+
+        <!-- JEE Main Misc -->
+        <h4>JEE Main 2024 Misc Papers</h4>
+        <ul>
+          <li>JEE Main 2024 Misc Paper 1 (2024)</li>
+          <li>JEE Main 2024 Misc Paper 2 (2024)</li>
+          <li>JEE Main 2024 Misc Paper 3 (2024)</li>
+          <li>JEE Main 2024 Misc Paper 4 (2024)</li>
+        </ul>
+
+        <!-- JEE Main 2024 -->
+        <h4>JEE Main 2024 (Online) Exams</h4>
+        <ul>
+          <li>JEE Main 2024 (Online) 1st February Evening Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 1st February Morning Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 31st January Evening Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 31st January Morning Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 30th January Evening Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 30th January Morning Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 29th January Evening Shift (2024)</li>
+          <li>JEE Main 2024 (Online) 29th January Morning Shift (2024)</li>
+        </ul>
+
+        <!-- JEE Advanced -->
+        <h4>JEE Advanced 2023-2014</h4>
+        <ul>
+          <li>JEE Advanced 2023 Paper 2 Online (2023)</li>
+          <li>JEE Advanced 2023 Paper 1 Online (2023)</li>
+          <li>JEE Advanced 2022 Paper 2 Online (2022)</li>
+          <li>JEE Advanced 2022 Paper 1 Online (2022)</li>
+          <li>JEE Advanced 2021 Paper 2 Online (2021)</li>
+        </ul>
+
+        <!-- NEET Exams -->
+        <h4>NEET Exams</h4>
+        <ul>
+          <li>NEET 2023 Manipur (2023)</li>
+          <li>NEET 2023 (2023)</li>
+          <li>NEET 2022 Phase 2 (2022)</li>
+          <li>NEET 2021 (2021)</li>
+          <li>NEET 2020 Phase 1 (2020)</li>
+        </ul>
+
+        <!-- BITSAT Exams -->
+        <h4>BITSAT Exams</h4>
+        <ul>
+          <li>BITSAT 2022 (2022)</li>
+          <li>BITSAT 2021 (2021)</li>
+          <li>BITSAT 2020 (2020)</li>
+        </ul>
+
+        <!-- AIEEE Exams -->
+        <h4>AIEEE Exams</h4>
+        <ul>
+          <li>AIEEE 2012 (2012)</li>
+          <li>AIEEE 2011 (2011)</li>
+          <li>AIEEE 2010 (2010)</li>
+          <li>AIEEE 2009 (2009)</li>
+        </ul>
+
+        ]]>
+      </description>
+    </item>
+    
 <item>
   <title>Update Study Material App via Telegram</title>
   <link>https://t.me/FREESTUDYApp</link>
