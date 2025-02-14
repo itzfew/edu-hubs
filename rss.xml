@@ -148,11 +148,11 @@
     <!-- Single Item for All Exams -->
     <item>
       <title>PYQ's for NEET and JEE</title>
-      <link>https://itzfew.github.io/Quizes/</link>
+      <link>https://quizes.pages.dev/</link>
       <description>
         <![CDATA[
         <div style="text-align: center; padding: 20px;">
-          <button onclick="window.location.href='https://itzfew.github.io/Quizes/'" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">
+          <button onclick="window.location.href='https://quizes.pages.dev/'" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">
             Start Quiz
           </button>
         </div>
