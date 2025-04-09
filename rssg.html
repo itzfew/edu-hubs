@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSS Item Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
+    h2 { color: #444; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 15px; padding: 10px 15px; background: #2b9348; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #238a3c; }
+    textarea { height: 250px; font-family: monospace; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>RSS Item Generator</h2>
+
+  <label for="type">Select Type</label>
+  <select id="type" onchange="toggleForm()">
+    <option value="post">Post</option>
+    <option value="audio">Audio</option>
+  </select>
+
+  <div id="form-fields">
+    <label>Title</label>
+    <input type="text" id="title" placeholder="Enter title" />
+
+    <label>Link</label>
+    <input type="url" id="link" placeholder="Enter full URL" />
+
+    <label>Link Type (enclosure MIME)</label>
+    <select id="linkType">
+      <option value="application/pdf">application/pdf</option>
+      <option value="audio/mp4">audio/mp4</option>
+      <option value="application/view">application/view</option>
+      <option value="video/mp4">video/mp4</option>
+    </select>
+
+    <label>Description</label>
+    <textarea id="description" placeholder="Enter description"></textarea>
+
+    <label>Publication Date</label>
+    <input type="datetime-local" id="pubDate" />
+
+    <button onclick="generateItem()">Generate RSS Item</button>
+  </div>
+
+  <textarea id="output" placeholder="Generated RSS <item> will appear here..."></textarea>
+
+  <script>
+    function toggleForm() {
+      const type = document.getElementById('type').value;
+      const linkType = document.getElementById('linkType');
+
+      // Auto-select MIME type based on type
+      if (type === 'post') linkType.value = 'application/pdf';
+      else if (type === 'audio') linkType.value = 'audio/mp4';
+    }
+
+    function generateItem() {
+      const title = document.getElementById('title').value.trim();
+      const link = document.getElementById('link').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const pubDateInput = document.getElementById('pubDate').value;
+      const pubDate = new Date(pubDateInput).toUTCString();
+      const linkType = document.getElementById('linkType').value;
+
+      if (!title || !link || !description || !pubDateInput) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      const guid = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
+
+      const item = `
+<item>
+  <title>${title}</title>
+  <link>${link}</link>
+  <description>${description}</description>
+  <pubDate>${pubDate}</pubDate>
+  <guid>${guid}</guid>
+  <enclosure url="${link}" type="${linkType}"/>
+</item>`.trim();
+
+      document.getElementById('output').value = item;
+    }
+  </script>
+
+</body>
+</html>
