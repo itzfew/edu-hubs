@@ -1,106 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>STUDY MATERIAL</title>
-    <description>Latest updates and news for my app.</description>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 12:00:00 GMT</lastBuildDate>
+    <title>NEET 2025 Updates</title>
+    <link>https://neet.nta.nic.in</link>
+    <description>Latest updates and information regarding NEET 2025</description>
     <item>
-    <title>Eduhub AIATS and Allen Majors</title>
-    <description><![CDATA[
-        <style>
-            body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 10px; }
-            .container { background: #ffffff; padding: 15px; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
-            h2 { color: #333399; }
-            p { font-size: 14px; color: #555; line-height: 1.6; }
-            a { color: #0088cc; text-decoration: none; font-weight: bold; }
-            .offer { background: #ffeded; padding: 10px; border-radius: 5px; color: #cc0000; font-weight: bold; }
-        </style>
-        <div class="container">
-            <h2>Exclusive Access to AIATS, Allen Majors & Aakash FTs</h2>
-            <p>Dear Students,</p>
-            <p>Get access to all AIATS (Aakash), Majors (Allen), and Final Tests by registering with a small fee.</p>
-            <p>Upon payment, you will receive lifetime access to our exclusive Telegram group where you can download tests in their <b>Original Printable Format</b>.</p>
-            <p>Register now: <a href="https://payments.cashfree.com/forms/Eduhub">Eduhub Registration</a></p>
-            <div class="offer">
-                <p><b>Eid Special Offer!</b> (Upcoming Friday to Friday)</p>
-                <p>30% off for the first 20 people! Use Coupon Code: <b>Eid2025p30</b></p>
-            </div>
-        </div>
-    ]]></description>
-    <pubDate>Sat, 22 Mar 2025 10:00:00 GMT</pubDate>
-    <guid>Eduhub-Offers-2025</guid>
-</item> 
-      <item>
-      <title>NEET UG 2025 Application Form: Required Documents and Information</title>
-      <link>https://neet.nta.nic.in</link>
-      <description><![CDATA[
-        <p>To successfully complete the NEET UG 2025 application form, ensure you have the following documents and information ready:</p>
-
-        <h3>1- Personal Details:</h3>
-        <ul>
-          <li>Full name (as per official records)</li>
-          <li>Date of birth</li>
-          <li>Gender</li>
-          <li>Nationality</li>
-          <li>Category (General, OBC, SC, ST, etc.)</li>
-          <li>Identification details (Aadhaar number, passport number, or any valid government ID)</li>
-        </ul>
-
-        <h3>2- Contact Information:</h3>
-        <ul>
-          <li>Valid mobile number</li>
-          <li>Active email address</li>
-          <li>Permanent and correspondence addresses</li>
-        </ul>
-
-        <h3>3- Academic Qualifications:</h3>
-        <ul>
-          <li>Class 10 and 12 mark sheets</li>
-          <li>Passing certificates</li>
-          <li>School details (name, address, board)</li>
-        </ul>
-
-        <h3>4- Scanned Images for Upload:</h3>
-        <ul>
-          <li><strong>Photograph:</strong> Recent color photograph with a white background</li>
-          <li>Format: JPG/JPEG</li>
-          <li>Size: 10 KB to 200 KB</li>
-          <li><strong>Postcard-sized Photograph:</strong> Size: 4" x 6"</li>
-          <li>Size: 50 KB to 300 KB</li>
-        </ul>
-
-        <h3>5- Signature:</h3>
-        <ul>
-          <li>Clear signature on white paper with black ink</li>
-          <li>Format: JPG/JPEG</li>
-          <li>Size: 4 KB to 30 KB</li>
-        </ul>
-
-        <h3>6- Left and Right Hand Thumb Impressions:</h3>
-        <ul>
-          <li>Impressions on white paper with blue ink</li>
-          <li>Format: JPG/JPEG</li>
-          <li>Size: 10 KB to 50 KB</li>
-        </ul>
-
-        <h3>7- Additional Certificates (if applicable):</h3>
-        <ul>
-          <li>Category certificate (SC/ST/OBC/EWS)</li>
-          <li>PwBD certificate</li>
-          <li>Citizenship certificate or Embassy certificate for NRI/OCI candidates</li>
-        </ul>
-
-        <h3>8- Payment Details:</h3>
-        <ul>
-          <li>Credit/Debit card, Net Banking, or UPI details</li>
-        </ul>
-      ]]></description>
-      <pubDate>Sat, 04 May 2025 14:00:00 GMT</pubDate>
-      <guid>neet-2025-application-docs</guid>
-      <enclosure url="https://neet.nta.nic.in" type="application/view"/>
-    </item> 
-   <item>
+      <title>NEET 2025 Syllabus</title>
+      <link>https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf</link>
+      <description>Download the official NEET 2025 syllabus to prepare for your exams. Source: nmc.org.in</description>
+      <pubDate>Tue, 25 Dec 2024 17:00:00 GMT</pubDate>
+      <guid>neet-2025-syllabus</guid>
+      <enclosure url="https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf" type="application/pdf"/>
+    </item>
+    <item>
       <title>NEET 2025 Exam Date and Important Information</title>
       <link>https://neet.nta.nic.in</link>
       <description><![CDATA[
@@ -117,219 +29,28 @@
       <enclosure url="https://neet.nta.nic.in" type="application/view"/>
     </item>
     <item>
-      <title>Ultimate NEET Study Bundle 2025</title>
-      <link>https://payments.cashfree.com/forms/Eduhub</link>
-      <description><![CDATA[
-        <div style="text-align: center; padding: 20px;">
-          <h2>Your NEET 2025 Study Bundle is Here! 🎯</h2>
-          <p>Get ready to ace your NEET exam with the most comprehensive study materials. All the resources you need in one amazing package!</p>
-          <ul style="list-style-type: none; padding: 0;">
-            <li>✔️ Handwritten notes</li>
-            <li>✔️ Unacademy Modules Rankers Test</li>
-            <li>✔️ Physics Wallah Modules</li>
-            <li>✔️ Physics Wallah Mindmaps</li>
-            <li>✔️ NCERT PUNCH & NCERT Exempler</li>
-            <li>✔️ MTG Books & Med Easy</li>
-            <li>✔️ JEE Mains 5 Years PYQs Hacks by Parthgoyal</li>
-            <li>✔️ ALLEN Test Series & Modules</li>
-            <li>✔️ Akash Test Series & Akash Modules 2025</li>
-            <li>✔️ Akash Mindmaps</li>
-            <li>✔️ 45 Days Crash Course</li>
-            <li>✔️ 33 Years NEET PYQs</li>
-            <li>✔️ 11 Years NEET PYQs</li>
-            <li>✔️ And much more...</li>
-          </ul>
-          <p>Everything you need to crack NEET 2025, now in one place! Don't miss out!</p>
-          <a href="https://payments.cashfree.com/forms/Eduhub" style="padding: 10px 20px; background-color: #FF5733; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">Get Your Bundle Now!</a>
-          <hr>
-          <h3>Why Choose This NEET Study Bundle?</h3>
-          <ul style="list-style-type: none; padding: 0;">
-            <li>✔️ All-in-one solution for NEET preparation</li>
-            <li>✔️ Mindmaps & Shortcuts for quick revision</li>
-            <li>✔️ Detailed Previous Years' Questions for practice</li>
-            <li>✔️ Crash Course to maximize your study time</li>
-            <li>✔️ Trusted study materials from MTG and Med Easy</li>
-            <li>✔️ In-depth practice with 33 Years and 11 Years of NEET PYQs</li>
-          </ul>
-          <p>This is your opportunity to maximize your NEET preparation! Get it now!</p>
-          <a href="https://payments.cashfree.com/forms/Eduhub" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">Start Your Journey Now!</a>
-          <hr>
-          <h3>45 Days NEET Crash Course for Maximum Success</h3>
-          <p>Stuck in last-minute preparation? Our 45-day crash course will help you get back on track and revise everything you need to know.</p>
-          <a href="https://payments.cashfree.com/forms/Eduhub" style="padding: 10px 20px; background-color: #FF5733; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">Join the Crash Course Now!</a>
-          <hr>
-          <h3>33 Years of NEET Previous Year Questions (PYQs)</h3>
-          <p>Unlock the most valuable resource for NEET preparation with 33 years of previous year questions! Perfect for deep practice and concept reinforcement.</p>
-          <a href="https://payments.cashfree.com/forms/Eduhub" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">Get 33 Years PYQs Now!</a>
-          <hr>
-          <h3>11 Years of NEET Previous Year Questions (PYQs)</h3>
-          <p>Consolidate your knowledge with 11 years of NEET PYQs, curated specifically for NEET aspirants like you!</p>
-          <a href="https://payments.cashfree.com/forms/Eduhub" style="padding: 10px 20px; background-color: #FF5733; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">Access 11 Years PYQs Now!</a>
-        </div>
-      ]]></description>
-      <pubDate>Tue, 30 Dec 2024 17:00:00 GMT</pubDate>
-      <guid>neet-2025-study-bundle</guid>
+      <title>Correction Window for NEET (UG)-2025 is LIVE!</title>
+      <link>https://neet.nta.nic.in/neetug-2025-correction-window/</link>
+      <description>NEET (UG)-2025 Correction Window is now open. Candidates can make necessary corrections to their application forms. Source: neet.nta.nic.in</description>
+      <pubDate>Thu, 06 Feb 2025 17:00:00 GMT</pubDate>
+      <guid>neet-2025-correction-window</guid>
+      <enclosure url="https://neet.nta.nic.in/neetug-2025-correction-window/" type="application/view"/>
     </item>
-    
-    <!-- Single Item for All Exams -->
     <item>
-      <title>PYQ's for NEET and JEE</title>
-      <link>https://quizes.pages.dev/</link>
-      <description>
-        <![CDATA[
-        <div style="text-align: center; padding: 20px;">
-          <button onclick="window.location.href='https://quizes.pages.dev/'" style="padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; cursor: pointer; border-radius: 5px;">
-            Start Quiz
-          </button>
-        </div>
-
-        <h3>Complete Exam List</h3>
-
-        <!-- JEE Main Misc -->
-        <h4>JEE Main 2024 Misc Papers</h4>
-        <ul>
-          <li>JEE Main 2024 Misc Paper 1 (2024)</li>
-          <li>JEE Main 2024 Misc Paper 2 (2024)</li>
-          <li>JEE Main 2024 Misc Paper 3 (2024)</li>
-          <li>JEE Main 2024 Misc Paper 4 (2024)</li>
-        </ul>
-
-        <!-- JEE Main 2024 -->
-        <h4>JEE Main 2024 (Online) Exams</h4>
-        <ul>
-          <li>JEE Main 2024 (Online) 1st February Evening Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 1st February Morning Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 31st January Evening Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 31st January Morning Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 30th January Evening Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 30th January Morning Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 29th January Evening Shift (2024)</li>
-          <li>JEE Main 2024 (Online) 29th January Morning Shift (2024)</li>
-        </ul>
-
-        <!-- JEE Advanced -->
-        <h4>JEE Advanced 2023-2014</h4>
-        <ul>
-          <li>JEE Advanced 2023 Paper 2 Online (2023)</li>
-          <li>JEE Advanced 2023 Paper 1 Online (2023)</li>
-          <li>JEE Advanced 2022 Paper 2 Online (2022)</li>
-          <li>JEE Advanced 2022 Paper 1 Online (2022)</li>
-          <li>JEE Advanced 2021 Paper 2 Online (2021)</li>
-        </ul>
-
-        <!-- NEET Exams -->
-        <h4>NEET Exams</h4>
-        <ul>
-          <li>NEET 2023 Manipur (2023)</li>
-          <li>NEET 2023 (2023)</li>
-          <li>NEET 2022 Phase 2 (2022)</li>
-          <li>NEET 2021 (2021)</li>
-          <li>NEET 2020 Phase 1 (2020)</li>
-        </ul>
-
-        <!-- BITSAT Exams -->
-        <h4>BITSAT Exams</h4>
-        <ul>
-          <li>BITSAT 2022 (2022)</li>
-          <li>BITSAT 2021 (2021)</li>
-          <li>BITSAT 2020 (2020)</li>
-        </ul>
-
-        <!-- AIEEE Exams -->
-        <h4>AIEEE Exams</h4>
-        <ul>
-          <li>AIEEE 2012 (2012)</li>
-          <li>AIEEE 2011 (2011)</li>
-          <li>AIEEE 2010 (2010)</li>
-          <li>AIEEE 2009 (2009)</li>
-        </ul>
-
-        ]]>
-      </description>
-      <guid>pyqs-of-all-exams</guid>
-      <pubDate>Thu, 25 Dec 2025 00:00:00 GMT</pubDate>
-      <enclosure url="https://raw.githubusercontent.com/itzfew/Quizes/refs/heads/main/img/pyq.png" type="image/png"/>
+      <title>Clarification on Question Paper Pattern and Examination Duration for NEET (UG)-2025</title>
+      <link>https://neet.nta.nic.in/public-notices/</link>
+      <description>Official clarification regarding the question paper pattern and examination duration for NEET (UG)-2025 has been released. Candidates are advised to review the details. Source: neet.nta.nic.in</description>
+      <pubDate>Mon, 10 Mar 2025 17:00:00 GMT</pubDate>
+      <guid>neet-2025-question-paper-clarification</guid>
+      <enclosure url="https://neet.nta.nic.in/public-notices/" type="application/view"/>
     </item>
-
-    <!-- Second Item - Update Study Material App via Telegram -->
     <item>
-      <title>Update Study Material App via Telegram</title>
-      <link>https://t.me/FREESTUDYApp</link>
-      <description>Stay up-to-date with the latest versions of the Study Material App by joining our Telegram group. 
-      Get notifications for new updates and download the app directly from our group. Click on the link to join:</description>
-      <pubDate>Tue, 25 Dec 2025 17:00:00 GMT</pubDate>
-      <guid>update-app-via-telegram</guid>
-      <enclosure url="https://t.me/FREESTUDYApp" type="application/view"/>
+      <title>Reminder for NEET(UG) 2025 Registration</title>
+      <link>https://neet.nta.nic.in/public-notices/</link>
+      <description>Reminder: The registration window for NEET (UG) 2025 is closing soon. Ensure you complete your application before the deadline. Source: neet.nta.nic.in</description>
+      <pubDate>Fri, 14 Mar 2025 17:00:00 GMT</pubDate>
+      <guid>neet-2025-registration-reminder</guid>
+      <enclosure url="https://neet.nta.nic.in/public-notices/" type="application/view"/>
     </item>
-
-    <!-- Third Item - NEET 2025 Syllabus -->
-    <item>
-      <title>NEET 2025 Syllabus</title>
-      <link>https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf</link>
-      <description>Download the official NEET 2025 syllabus to prepare for your exams. Source: nmc.org.in</description>
-      <pubDate>Tue, 25 Dec 2024 17:00:00 GMT</pubDate>
-      <guid>neet-2025-syllabus</guid>
-      <enclosure url="https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/neetUG2025.pdf" type="application/pdf"/>
-    </item>
-
-    <!-- Fourth Item - Motivational Song for NEET -->
-    <item>
-      <title>Khud Pe YAKEEN - Official Song - NEET 2024 Dropper</title>
-      <link>https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4</link>
-      <description>Motivational song for NEET 2025 Dropper by Alakh Sir of Physics Wallah.</description>
-      <pubDate>Mon, 25 Dec 2024 23:00:00 +0000</pubDate>
-      <guid>khud-pe-yakeen-official-song-neet-2025-dropper</guid>
-      <enclosure url="https://edu-hubs.pages.dev/audio/Khud%20Pe%20YAKEEN%20-%20Official%20Song%20_%20NEET%202024%20Dropper%20_%20Physics%20Wallah%20_%20Alakh%20Sir%20_%20Prateek%20Sahaii.mp4" type="audio/mp4"/>
-    </item>
-
-    <!-- Fifth Item - Study Material APP Update -->
-    <item>
-      <title>Study Material APP Update</title>
-      <description><![CDATA[
-        <h3>The latest update for the Study Material APK brings new features and improvements. Below are the details of the update and the available versions for download:</h3>
-
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
-          <tr>
-            <th colspan="2" style="text-align: center; background-color: #4CAF50; color: white;">Study Material APK Update Details</th>
-          </tr>
-          <tr>
-            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">Latest Version:</td>
-            <td>
-              <a href="https://itzfew.github.io/edu-hubs/Apk/Com_studymaterial_app_v3.apk" 
-                 style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;"
-                 target="_blank">Download Latest Version</a>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">Previous Versions:</td>
-            <td>
-              <button onclick="toggleVersionList()" style="padding: 5px 10px; background-color: #FF9800; color: white; border: none; border-radius: 5px; cursor: pointer;">View All Versions</button>
-              <ul id="versionList" style="list-style: none; padding: 0; display: none; margin-top: 10px;">
-                <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v1.apk" target="_blank">Version 1 - Initial release with basic study materials</a></li>
-                <li><a href="https://edu-hubs.pages.dev/Apk/Com_studymaterial_app_v2.apk" target="_blank">Version 2 - Added more features and more tests</a></li>
-                <li><a href="https://itzfew.github.io/edu-hubs/Apk/Com_studymaterial_app_v3.apk" target="_blank">Version 3 - new update</a></li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 30%; font-weight: bold; background-color: #f9f9f9;">App Icon:</td>
-            <td>
-              <img src="https://edu-hubs.pages.dev/img/logo.png" alt="App Icon" style="max-width: 150px; border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
-            </td>
-          </tr>
-        </table>
-
-        <script>
-          function toggleVersionList() {
-            const versionList = document.getElementById('versionList');
-            versionList.style.display = versionList.style.display === 'none' ? 'block' : 'none';
-          }
-        </script>
-        ]]>
-      </description>
-      <pubDate>Mon, 25 Dec 2024 11:40:00 GMT</pubDate>
-      <guid>study-material-apk-update</guid>
-    </item>
-
   </channel>
 </rss>
