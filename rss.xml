@@ -7,21 +7,28 @@
     <item>
   <title>NEET 2025 Advance City Intimation Slip Released</title>
   <link>https://neet.nta.nic.in/</link>
-  <description>NEET UG 2025 Advance City Intimation Slip has been released. Candidates can now check their allotted city. Visit the official NTA NEET portal to download your slip.</description>
+  <description><![CDATA[
+    <h1>NEET 2025 City Intimation Slip Released</h1>
+    <p>NEET UG 2025 Advance City Intimation Slip has been released.</p>
+    <p><strong>Candidates</strong> can now check their allotted city by visiting the official portal.</p>
+    <p><a href="https://neet.nta.nic.in/">Click here to check your city</a></p>
+    <br>
+    <p><strong>Note:</strong> This is <em>not</em> the Admit Card. The official Admit Card will be released separately.</p>
+    <h3>Exam Date:</h3>
+    <p>May 5, 2025</p>
+    <h3>Admit Card Expected:</h3>
+    <p>End of April 2025</p>
+    <h3>Contact Details:</h3>
+    <ul>
+      <li>Email: <a href="mailto:neetug2025@nta.ac.in">neetug2025@nta.ac.in</a></li>
+      <li>Phone 1: 011-40759000</li>
+      <li>Phone 2: 011-69227700</li>
+    </ul>
+  ]]></description>
   <pubDate>Wed, 24 Apr 2025 17:00:00 GMT</pubDate>
   <guid>neet-2025-city-slip</guid>
-  <enclosure url="https://neet.nta.nic.in/" type="text/html"/>
-  <additionalInfo>
-    <note>This is not the Admit Card. The official Admit Card will be released separately.</note>
-    <contactDetails>
-      <email>neetug2025@nta.ac.in</email>
-      <phone>011-40759000</phone>
-      <phone>011-69227700</phone>
-    </contactDetails>
-    <examDate>2025-05-05</examDate>
-    <admitCardExpected>End of April 2025</admitCardExpected>
-  </additionalInfo>
-</item> 
+  <enclosure url="https://neet.nta.nic.in/" type="application/view"/>
+</item>
     <item>
   <title>Big App Update is Live!</title>
   <link>https://studyapp.pages.dev/</link>
