@@ -56,24 +56,32 @@
   <pubDate>Wed, 24 Apr 2025 17:00:00 GMT</pubDate>
   <guid>neet-2025-city-slip</guid>
   <enclosure url="https://neet.nta.nic.in/" type="application/view"/>
-</item>
-    <item>
+<item>
   <title>Big App Update is Live!</title>
   <link>https://studyapp.pages.dev/</link>
-  <description>🚀 Big App Update is Live! 📱
-Download directly: https://studyapp.pages.dev/
+  <description><![CDATA[
+    <div style="border: 2px solid #4CAF50; border-radius: 10px; padding: 20px; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif; background: #f9f9f9;">
+      <h2 style="color: #4CAF50; text-align: center;">Big App Update is Live!</h2>
 
-Or from Samsung Store: https://apps.samsung.com/appquery/appDetail.as?appId=Com.studymaterial.app 
+      <p style="text-align: center; margin-bottom: 20px;">
+        <a href="https://studyapp.pages.dev/" style="text-decoration: none; color: #2196F3; font-weight: bold;">Download Now</a> |
+        <a href="https://apps.samsung.com/appquery/appDetail.as?appId=Com.studymaterial.app" style="text-decoration: none; color: #2196F3; font-weight: bold;">Samsung Store</a>
+      </p>
 
-✨ What's New?
-✅ OMR Sheet Checking
-✅ Focus Mode for Study
-✅ Doubt Solving Feature
-✅ PYQs for NEET and JEE
-✅ Motivational Videos
-✅ More Cool Features Coming Soon!
-💡 Update Now and Boost Your Preparation!
-#StudyApp #NEET #JEE #Update #FocusMode #OMR #PYQ #Motivation</description>
+      <ul style="list-style: none; padding: 0; font-size: 16px; text-align: left;">
+        <li>✅ <strong>OMR Sheet Checking</strong></li>
+        <li>✅ <strong>Focus Mode for Study</strong></li>
+        <li>✅ <strong>Doubt Solving Feature</strong></li>
+        <li>✅ <strong>PYQs for NEET and JEE</strong></li>
+        <li>✅ <strong>Motivational Videos</strong></li>
+        <li>✨ <strong>More Cool Features Coming Soon!</strong></li>
+      </ul>
+
+      <p style="margin-top: 20px; text-align: center; font-size: 18px; color: #555;">
+        💡 Update Now and Boost Your Preparation!
+      </p>
+    </div>
+  ]]></description>
   <pubDate>Sat, 12 Apr 2025 17:42:00 GMT</pubDate>
   <guid>big-app-update-is-live</guid>
   <enclosure url="https://studyapp.pages.dev/" type="application/view"/>
