@@ -5,6 +5,61 @@
     <link>https://neet.nta.nic.in</link>
     <description>Latest updates and information regarding NEET 2025</description>
     <item>
+  <title>New Telegram Bot Launched - @EduhubKMR_bot!</title>
+  <link>https://t.me/EduhubKMR_bot</link>
+  <description><![CDATA[
+    <div style="border: 2px solid #2196F3; border-radius: 10px; padding: 20px; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif; background: #f2f9ff;">
+      <h2 style="color: #2196F3; text-align: center;">Introducing @EduhubKMR_bot on Telegram!</h2>
+
+      <p style="font-size: 16px;">We have built an exclusive Telegram bot for students!</p>
+
+      <h3 style="color: #0d47a1;">Get Previous Year Questions Easily:</h3>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li><strong>Biology:</strong> <code>/pyqb</code> → 1 random Biology PYQ</li>
+        <li><strong>Biology:</strong> <code>/pyqb 2</code> → 2 random Biology PYQs</li>
+        <li><strong>Chemistry:</strong> <code>/pyqc</code> or <code>/pyqc 3</code></li>
+        <li><strong>Physics:</strong> <code>/pyqp</code> or <code>/pyqp 5</code></li>
+        <li><strong>Mixed Subjects:</strong> <code>/pyq</code> or <code>/pyq 4</code></li>
+      </ul>
+
+      <h3 style="color: #0d47a1;">Eduhub Features:</h3>
+      <ul style="list-style-type: square; padding-left: 20px;">
+        <li>✅ Study materials for NEET and JEE</li>
+        <li>✅ Practice tests and question banks</li>
+        <li>✅ NCERT solutions access</li>
+        <li>✅ Study group links</li>
+        <li>✅ Tools and tips for exam preparation</li>
+      </ul>
+
+      <h3 style="color: #0d47a1;">Available Commands:</h3>
+      <ul style="list-style-type: circle; padding-left: 20px;">
+        <li><code>/help</code> – List of commands</li>
+        <li><code>/about</code> – About this bot</li>
+        <li><code>/groups</code> – Study group links</li>
+        <li><code>/neet</code> – NEET resources</li>
+        <li><code>/jee</code> – JEE resources</li>
+        <li><code>/study</code> – Materials for subjects</li>
+        <li><code>/quote</code> – Random motivational quote</li>
+        <li><code>/me</code> – View your user details</li>
+        <li><code>/users</code> – (Admin) Show total and active users</li>
+        <li><code>/quiz</code> – Get quizzes of all exams PYQs</li>
+      </ul>
+
+      <p style="margin-top: 20px; font-size: 16px;">
+        🤖 <strong>Also check:</strong> @NeetAspirantsBot for even more NEET, JEE Mains, JEE Advanced, and BITSAT PYQs and features!
+      </p>
+
+      <p style="margin-top: 20px; text-align: center; color: #555;">
+        👨‍💻 <strong>Author:</strong> itzfew<br/>
+        📧 <strong>Support:</strong> itzme.eduhub.contact@gmail.com
+      </p>
+    </div>
+  ]]></description>
+  <pubDate>Mon, 28 Apr 2025 18:00:00 GMT</pubDate>
+  <guid>telegram-bot-launch-eduhubkmr</guid>
+  <enclosure url="https://t.me/EduhubKMR_bot" type="application/view"/>
+</item> 
+    <item>
   <title>Reporting of Suspicious Claims in NEET(UG) 2025 Examination</title>
   <link>https://neetclaim.centralindia.cloudapp.azure.com/</link>
   <description><![CDATA[
