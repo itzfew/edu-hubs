@@ -5,8 +5,7 @@ const elSymbol = document.getElementById('elSymbol');
 const elNumber = document.getElementById('elNumber');
 const viewMore = document.getElementById('viewMore');
 
-let camera, scene, renderer;
-let controls;
+let camera, scene, renderer, group;
 let objects = [];
 let elementsData = {};
 
@@ -18,8 +17,11 @@ async function init() {
   camera.position.z = 3000;
 
   scene = new THREE.Scene();
+  group = new THREE.Group();
+  scene.add(group);
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  // ✅ CSS3DRenderer instead of WebGLRenderer
+  renderer = new THREE.CSS3DRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
@@ -62,14 +64,14 @@ function buildTable(data) {
     const x = (el.xpos - 9) * 160;
     const y = -(el.ypos - 5) * 180;
     objectCSS.position.set(x, y, 0);
-    scene.add(objectCSS);
+    group.add(objectCSS);
     objects.push(objectCSS);
   });
 }
 
 function animate() {
   requestAnimationFrame(animate);
-  scene.rotation.y += 0.001;
+  group.rotation.y += 0.001; // ✅ rotate group, not scene
   renderer.render(scene, camera);
 }
 
