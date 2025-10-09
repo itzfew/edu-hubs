@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at center, #101019 0%, #000000 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  overflow: hidden;
+}
+#overlay {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+}
+#container {
+  width: 100vw;
+  height: 100vh;
+}
+.element {
+  width: 120px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+.element .symbol {
+  font-size: 2em;
+  font-weight: bold;
+}
+.element .number {
+  font-size: 0.8em;
+}
+.element .mass {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+.element:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+#elementInfo {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background: rgba(20, 20, 30, 0.85);
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+button {
+  background: #1a73e8;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0053c2;
+}
