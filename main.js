@@ -5,34 +5,28 @@ const elSymbol = document.getElementById('elSymbol');
 const elNumber = document.getElementById('elNumber');
 const viewMore = document.getElementById('viewMore');
 
-let camera, scene, renderer;
-let group; // make sure declared at top
+let camera, scene, renderer, group;
 let elementsData = {};
 let objects = [];
 
 init();
 
 async function init() {
-  // === CAMERA ===
-  camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    1,
-    5000
-  );
+  // CAMERA
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.z = 3000;
 
-  // === SCENE & GROUP ===
+  // SCENE & GROUP
   scene = new THREE.Scene();
   group = new THREE.Group();
-  scene.add(group); // 🟢 this ensures group is always defined
+  scene.add(group);
 
-  // === RENDERER ===
+  // RENDERER (CSS3D)
   renderer = new THREE.CSS3DRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  // === FETCH DATA ===
+  // FETCH DATA
   const response = await fetch(
     'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/refs/heads/master/periodic-table-lookup.json'
   );
@@ -40,19 +34,18 @@ async function init() {
   elementsData = data;
 
   buildTable(data);
-  animate(); // 🟢 Call after group has been created
+
+  animate();
 
   window.addEventListener('resize', onWindowResize);
 }
 
 function buildTable(data) {
   const order = data.order;
-
   order.forEach(key => {
     const el = data[key];
-    if (!el) return; // safety check
+    if (!el) return;
 
-    // === Element DIV ===
     const elemDiv = document.createElement('div');
     elemDiv.className = 'element';
     elemDiv.innerHTML = `
@@ -73,10 +66,16 @@ function buildTable(data) {
       };
     });
 
-    // === Position in 3D Space ===
     const objectCSS = new THREE.CSS3DObject(elemDiv);
-    const x = (el.xpos - 9) * 160;
-    const y = -(el.ypos - 5) * 180;
+
+    // 🔥 Correct positioning — table centered in view
+    const spacingX = 120;
+    const spacingY = 160;
+    const centerOffsetX = 9;
+    const centerOffsetY = 4;
+    const x = (el.xpos - centerOffsetX) * spacingX;
+    const y = -(el.ypos - centerOffsetY) * spacingY;
+
     objectCSS.position.set(x, y, 0);
     group.add(objectCSS);
     objects.push(objectCSS);
@@ -85,7 +84,7 @@ function buildTable(data) {
 
 function animate() {
   requestAnimationFrame(animate);
-  if (group) group.rotation.y += 0.001; // ✅ check group exists
+  if (group) group.rotation.y += 0.001;
   renderer.render(scene, camera);
 }
 
