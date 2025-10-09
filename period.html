@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium 3D Periodic Table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #app {
+            height: 100vh;
+            position: relative;
+        }
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav button {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        nav button:hover, nav button.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #periodic-page {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            grid-template-rows: repeat(7, 1fr) 50px repeat(2, 1fr);
+            gap: 2px;
+            padding: 60px 20px 20px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .element {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .element:hover {
+            transform: translateZ(20px) rotateY(5deg) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .element-symbol {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .element-number {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        .element-name {
+            font-size: 0.6em;
+            opacity: 0.7;
+            text-align: center;
+            padding: 0 2px;
+        }
+
+        .element.empty {
+            visibility: hidden;
+        }
+
+        #lanthanides-row, #actinides-row {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 2px;
+            padding: 0 10px;
+            align-items: center;
+        }
+
+        .series-label {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #periodic-page {
+                grid-template-columns: repeat(18, 1fr);
+                gap: 1px;
+                padding: 80px 10px 10px;
+            }
+
+            .element-symbol {
+                font-size: 1em;
+            }
+        }
+
+        .category-alkali-metal { border-left: 4px solid #ff6b6b; }
+        .category-alkaline-earth-metal { border-left: 4px solid #4ecdc4; }
+        .category-lanthanide { border-left: 4px solid #ffb6c1; }
+        .category-actinide { border-left: 4px solid #ff69b4; }
+        .category-transition-metal { border-left: 4px solid #f1c40f; }
+        .category-post-transition-metal { border-left: 4px solid #e67e22; }
+        .category-metalloid { border-left: 4px solid #95a5a6; }
+        .category-diatomic-nonmetal, .category-polyatomic-nonmetal, .category-nonmetal { border-left: 4px solid #1abc9c; }
+        .category-noble-gas { border-left: 4px solid #3498db; }
+        .category-unknown { border-left: 4px solid #2c3e50; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <button id="table-btn" class="active">Periodic Table</button>
+        </nav>
+        <div id="periodic-page"></div>
+        <div id="lanthanides-row" class="series-row"></div>
+        <div id="actinides-row" class="series-row"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.167.1/examples/js/controls/OrbitControls.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
