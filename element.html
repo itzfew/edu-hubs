@@ -3,91 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Element Details</title>
+    <title>Element Explorer</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-            overflow: hidden;
+            box-sizing: border-box;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            z-index: 1;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
         }
-        .header h1 {
-            color: #fff;
-            font-size: 2.5em;
-            margin: 0;
+        
+        /* Space background with stars */
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at center, #0a0e2a 0%, #000000 70%);
         }
-        .model-container {
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fafafa, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #ddd, transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            opacity: 0.5;
+        }
+        
+        /* Main content area */
+        .main-content {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
-            z-index: 1;
+            min-height: 100vh;
+            padding: 20px;
             position: relative;
+            z-index: 1;
         }
-        .model {
-            width: 100vw;
+        
+        /* 3D Model Container */
+        .model-container {
+            width: 100%;
+            max-width: 800px;
             height: 70vh;
-            border: none;
-            background-color: transparent;
-        }
-        .nuclear {
-            text-align: center;
-            font-size: 4em;
-            margin-bottom: 30px;
-            color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
-            z-index: 1;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 100, 255, 0.3);
             position: relative;
         }
-        .image-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
+        
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+            --progress-bar-color: #4a90e2;
         }
-        .attribution {
-            font-size: 0.8em;
-            color: #ccc;
+        
+        /* Element Symbol Display */
+        .element-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+            pointer-events: none;
+            z-index: 0;
         }
-        .link {
-            color: #2980b9;
-            text-decoration: none;
+        
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(20, 30, 48, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 10;
         }
-        .link:hover {
-            text-decoration: underline;
+        
+        .info-panel.active {
+            transform: translateY(0);
+            opacity: 1;
         }
-        @media (max-width: 600px) {
-            .model {
+        
+        .info-panel h2 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(100, 150, 255, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .info-panel p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .info-panel strong {
+            color: #6ab0ff;
+        }
+        
+        /* Toggle Button */
+        .toggle-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(20, 30, 48, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            z-index: 11;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-info:hover {
+            background: rgba(30, 45, 70, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .toggle-info i {
+            font-size: 1.5rem;
+            color: #6ab0ff;
+        }
+        
+        /* Element Name */
+        .element-name {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(100, 150, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        /* Controls Panel */
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 30, 48, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            z-index: 10;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #6ab0ff;
+        }
+        
+        .slider {
+            width: 200px;
+            height: 5px;
+            background: rgba(100, 150, 255, 0.2);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .model-container {
                 height: 50vh;
             }
-            .header h1 {
-                font-size: 2em;
+            
+            .element-symbol {
+                font-size: 5rem;
             }
-            .nuclear {
-                font-size: 2.5em;
+            
+            .element-name {
+                font-size: 2rem;
             }
+            
+            .info-panel {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
+            
+            .controls {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+            }
+            
+            .slider {
+                width: 100%;
+            }
+        }
+        
+        /* Animation for loading */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Error message styling */
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            background: rgba(20, 30, 48, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 100px auto;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 50, 50, 0.3);
+        }
+        
+        .error-message h2 {
+            color: #ff4d4d;
+            margin-bottom: 15px;
         }
     </style>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div id="content"></div>
+    <div class="space-background">
+        <div class="stars"></div>
+    </div>
+    
+    <div class="main-content">
+        <div id="content">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </div>
+    
+    <div class="toggle-info" id="toggleInfo">
+        <i class="fas fa-info-circle"></i>
+    </div>
+    
     <script>
         const url = 'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/periodic-table-lookup.json';
         const params = new URLSearchParams(window.location.search);
         const symbol = params.get('id') ? params.get('id').toLowerCase() : null;
 
         if (!symbol) {
-            document.getElementById('content').innerHTML = '<p>No element specified.</p>';
+            document.getElementById('content').innerHTML = `
+                <div class="error-message fade-in">
+                    <h2>No Element Specified</h2>
+                    <p>Please specify an element symbol in the URL parameter (e.g., ?id=Li)</p>
+                </div>
+            `;
         } else {
             fetch(url)
                 .then(res => res.json())
@@ -101,57 +323,161 @@
                     });
 
                     if (!element) {
-                        document.getElementById('content').innerHTML = '<p>Element not found.</p>';
+                        document.getElementById('content').innerHTML = `
+                            <div class="error-message fade-in">
+                                <h2>Element Not Found</h2>
+                                <p>No element found with symbol: ${symbol.toUpperCase()}</p>
+                            </div>
+                        `;
                         return;
                     }
 
+                    // Create the main content
                     let html = `
-                        <div class="header">
-                            <h1>${element.name} (${element.symbol})</h1>
-                        </div>
+                        <div class="element-name fade-in">${element.name}</div>
+                        <div class="model-container fade-in">
+                            <div class="element-symbol">${element.symbol}</div>
                     `;
 
                     if (element.bohr_model_3d) {
                         html += `
-                            <div class="model-container">
-                                <model-viewer class="model" src="${element.bohr_model_3d}" alt="3D model of ${element.name}" camera-controls touch-action="pan-y" auto-rotate ar shadow-intensity="1" interaction-prompt="auto" style="--poster-color: transparent;"></model-viewer>
+                            <model-viewer 
+                                id="element-model"
+                                src="${element.bohr_model_3d}" 
+                                alt="3D model of ${element.name}" 
+                                camera-controls 
+                                auto-rotate 
+                                shadow-intensity="1"
+                                exposure="1.2"
+                                environment-image="neutral"
+                                interaction-prompt="none"
+                                ar
+                                camera-orbit="0deg 75deg 105%"
+                                field-of-view="30deg">
+                            </model-viewer>
+                        `;
+                    } else {
+                        html += `
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                                <p>3D model not available for ${element.name}</p>
                             </div>
                         `;
                     }
 
-                    let A = Math.round(element.atomic_mass);
-                    html += `
-                        <div class="nuclear">
-                            \[ {}^{${A}}_{${element.number}} \\mathrm{${element.symbol}} \]
+                    html += `</div>`;
+                    
+                    document.getElementById('content').innerHTML = html;
+                    
+                    // Create and add the info panel
+                    const infoPanel = document.createElement('div');
+                    infoPanel.className = 'info-panel';
+                    infoPanel.innerHTML = `
+                        <h2>${element.name} Details</h2>
+                        <p><strong>Atomic Number:</strong> ${element.number}</p>
+                        <p><strong>Atomic Mass:</strong> ${element.atomic_mass}</p>
+                        <p><strong>Category:</strong> ${element.category}</p>
+                        <p><strong>Phase:</strong> ${element.phase}</p>
+                        <p><strong>Discovered By:</strong> ${element.discovered_by || 'Unknown'}</p>
+                        <p><strong>Melting Point:</strong> ${element.melt ? element.melt + ' K' : 'N/A'}</p>
+                        <p><strong>Boiling Point:</strong> ${element.boil ? element.boil + ' K' : 'N/A'}</p>
+                        <p><strong>Density:</strong> ${element.density ? (element.phase === 'Gas' ? element.density + ' g/L' : element.density + ' g/cm³') : 'N/A'}</p>
+                        <p><strong>Electron Configuration:</strong> ${element.electron_configuration}</p>
+                        <p><strong>Electronegativity:</strong> ${element.electronegativity_pauling || 'N/A'}</p>
+                        <p><strong>Summary:</strong> ${element.summary}</p>
+                    `;
+                    
+                    document.body.appendChild(infoPanel);
+                    
+                    // Create and add controls panel
+                    const controlsPanel = document.createElement('div');
+                    controlsPanel.className = 'controls fade-in';
+                    controlsPanel.innerHTML = `
+                        <div class="control-group">
+                            <label for="rotationSpeed">Rotation Speed</label>
+                            <input type="range" id="rotationSpeed" class="slider" min="0" max="2" step="0.1" value="1">
+                        </div>
+                        <div class="control-group">
+                            <label for="exposure">Exposure</label>
+                            <input type="range" id="exposure" class="slider" min="0.5" max="2" step="0.1" value="1.2">
+                        </div>
+                        <div class="control-group">
+                            <label for="shadow">Shadow Intensity</label>
+                            <input type="range" id="shadow" class="slider" min="0" max="2" step="0.1" value="1">
                         </div>
                     `;
-
-                    if (element.image && element.image.url) {
-                        html += `
-                            <div style="text-align: center; margin-bottom: 20px; background: transparent; z-index: 1; position: relative;">
-                                <img src="${element.image.url}" alt="${element.image.title}">
-                                <p class="attribution">${element.image.attribution}</p>
-                            </div>
-                        `;
-                    }
-
-                    if (element.spectral_img) {
-                        html += `
-                            <div style="text-align: center; margin-bottom: 20px; background: transparent; z-index: 1; position: relative;">
-                                <img src="${element.spectral_img}" alt="Spectral image of ${element.name}">
-                            </div>
-                        `;
-                    }
-
-                    document.getElementById('content').innerHTML = html;
-
-                    // Refresh MathJax after content is added
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                    
+                    document.body.appendChild(controlsPanel);
+                    
+                    // Set up interactions
+                    setupInteractions(element);
                 })
                 .catch(error => {
                     console.error('Error fetching JSON:', error);
-                    document.getElementById('content').innerHTML = '<p>Error loading element data.</p>';
+                    document.getElementById('content').innerHTML = `
+                        <div class="error-message fade-in">
+                            <h2>Error Loading Data</h2>
+                            <p>There was an error loading the element data. Please try again later.</p>
+                        </div>
+                    `;
                 });
+        }
+
+        function setupInteractions(element) {
+            // Toggle info panel
+            const toggleInfo = document.getElementById('toggleInfo');
+            const infoPanel = document.querySelector('.info-panel');
+            
+            toggleInfo.addEventListener('click', () => {
+                infoPanel.classList.toggle('active');
+            });
+            
+            // Control sliders
+            const rotationSlider = document.getElementById('rotationSpeed');
+            const exposureSlider = document.getElementById('exposure');
+            const shadowSlider = document.getElementById('shadow');
+            const modelViewer = document.getElementById('element-model');
+            
+            if (modelViewer) {
+                rotationSlider.addEventListener('input', (e) => {
+                    const speed = parseFloat(e.target.value);
+                    modelViewer.autoRotateDelay = 0;
+                    modelViewer.autoRotate = speed > 0;
+                    if (speed > 0) {
+                        modelViewer.setAttribute('auto-rotate-delay', '0');
+                        modelViewer.setAttribute('auto-rotate', 'true');
+                        modelViewer.setAttribute('rotation-per-second', speed + 'rad');
+                    } else {
+                        modelViewer.setAttribute('auto-rotate', 'false');
+                    }
+                });
+                
+                exposureSlider.addEventListener('input', (e) => {
+                    modelViewer.exposure = parseFloat(e.target.value);
+                });
+                
+                shadowSlider.addEventListener('input', (e) => {
+                    modelViewer.shadowIntensity = parseFloat(e.target.value);
+                });
+            }
+            
+            // Close info panel when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!infoPanel.contains(e.target) && !toggleInfo.contains(e.target) && infoPanel.classList.contains('active')) {
+                    infoPanel.classList.remove('active');
+                }
+            });
+            
+            // Add subtle animation to the element symbol
+            const elementSymbol = document.querySelector('.element-symbol');
+            if (elementSymbol) {
+                let angle = 0;
+                setInterval(() => {
+                    angle += 0.2;
+                    const x = Math.sin(angle) * 5;
+                    const y = Math.cos(angle) * 3;
+                    elementSymbol.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+                }, 50);
+            }
         }
     </script>
 </body>
