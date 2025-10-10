@@ -1,22 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Element Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/loaders/GLTFLoader.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .info { margin-bottom: 20px; }
+        .model { width: 400px; height: 400px; }
+        img { max-width: 100%; height: auto; }
+        .attribution { font-size: 0.8em; color: #666; }
+    </style>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
-  <button onclick="history.back()" style="position:absolute;top:20px;left:20px;">← Back</button>
-  <div id="bohrContainer"></div>
-  <div id="elementDetails">
-    <h1 id="detailName"></h1>
-    <p id="detailSymbol"></p>
-    <p id="detailNumber"></p>
-    <p id="detailSummary"></p>
-  </div>
-  <script src="element.js"></script>
+    <div id="content"></div>
+    <script>
+        const url = 'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/periodic-table-lookup.json';
+        const params = new URLSearchParams(window.location.search);
+        const symbol = params.get('id');
+
+        if (!symbol) {
+            document.getElementById('content').innerHTML = '<p>No element specified.</p>';
+        } else {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const order = data.order;
+                    let element = null;
+                    order.forEach(key => {
+                        if (data[key] && data[key].symbol === symbol) {
+                            element = data[key];
+                        }
+                    });
+
+                    if (!element) {
+                        document.getElementById('content').innerHTML = '<p>Element not found.</p>';
+                        return;
+                    }
+
+                    let html = `
+                        <h1>${element.name} (${element.symbol})</h1>
+                        <div class="info">
+                            <p><strong>Atomic Number:</strong> ${element.number}</p>
+                            <p><strong>Atomic Mass:</strong> ${element.atomic_mass}</p>
+                            <p><strong>Category:</strong> ${element.category}</p>
+                            <p><strong>Phase:</strong> ${element.phase}</p>
+                            <p><strong>Discovered By:</strong> ${element.discovered_by || 'N/A'}</p>
+                            <p><strong>Melting Point:</strong> ${element.melt ? element.melt + ' K' : 'N/A'}</p>
+                            <p><strong>Boiling Point:</strong> ${element.boil ? element.boil + ' K' : 'N/A'}</p>
+                            <p><strong>Density:</strong> ${element.density || 'N/A'}</p>
+                            <p><strong>Electron Configuration:</strong> ${element.electron_configuration}</p>
+                            <p><strong>Electronegativity (Pauling):</strong> ${element.electronegativity_pauling || 'N/A'}</p>
+                            <p><strong>Summary:</strong> ${element.summary}</p>
+                        </div>
+                    `;
+
+                    if (element.bohr_model_3d) {
+                        html += `
+                            <h2>3D Bohr Model</h2>
+                            <model-viewer class="model" src="${element.bohr_model_3d}" alt="3D model of ${element.name}" camera-controls auto-rotate ar></model-viewer>
+                        `;
+                    }
+
+                    if (element.image && element.image.url) {
+                        html += `
+                            <h2>Image</h2>
+                            <img src="${element.image.url}" alt="${element.image.title}">
+                            <p class="attribution">${element.image.attribution}</p>
+                        `;
+                    }
+
+                    if (element.spectral_img) {
+                        html += `
+                            <h2>Spectral Image</h2>
+                            <img src="${element.spectral_img}" alt="Spectral image of ${element.name}">
+                        `;
+                    }
+
+                    html += `<p><a href="${element.source}" target="_blank">More information on Wikipedia</a></p>`;
+
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON:', error);
+                    document.getElementById('content').innerHTML = '<p>Error loading element data.</p>';
+                });
+        }
+    </script>
 </body>
 </html>
