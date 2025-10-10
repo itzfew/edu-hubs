@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        #space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at center, #0a0e2a 0%, #000000 70%);
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #ddd, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 5s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        
+        .header h1 {
+            color: #4fc3f7;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .model-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .model-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(79, 195, 247, 0.3);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+        
+        .element-symbol-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8em;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.7);
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .control-btn {
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid #4fc3f7;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .control-btn:hover {
+            background: rgba(79, 195, 247, 0.3);
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+        }
+        
+        .info-panel {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .info-value {
+            font-size: 1.1em;
+        }
+        
+        .image-section {
+            margin-top: 20px;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .attribution {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .link {
+            color: #4fc3f7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 5px rgba(79, 195, 247, 0.7);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #4fc3f7;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .model-container {
+                height: 400px;
+            }
+            
+            .element-symbol-3d {
+                font-size: 5em;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .model-container {
+                height: 300px;
+            }
+            
+            .element-symbol-3d {
+                font-size: 4em;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+    <div id="space-background">
+        <div class="stars"></div>
+    </div>
+    
+    <div class="container">
+        <div id="content">
+            <div class="loading">Loading element data...</div>
+        </div>
+    </div>
+    
+    <script>
+        const url = 'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/periodic-table-lookup.json';
+        const params = new URLSearchParams(window.location.search);
+        const symbol = params.get('id') ? params.get('id').toLowerCase() : null;
+
+        if (!symbol) {
+            document.getElementById('content').innerHTML = '<div class="error">No element specified.</div>';
+        } else {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const order = data.order;
+                    let element = null;
+                    order.forEach(key => {
+                        if (data[key] && data[key].symbol.toLowerCase() === symbol) {
+                            element = data[key];
+                        }
+                    });
+
+                    if (!element) {
+                        document.getElementById('content').innerHTML = '<div class="error">Element not found.</div>';
+                        return;
+                    }
+
+                    let html = `
+                        <div class="header">
+                            <h1>${element.name} (${element.symbol})</h1>
+                        </div>
+                        
+                        <div class="model-section">
+                            <div class="model-container">
+                    `;
+
+                    if (element.bohr_model_3d) {
+                        html += `
+                                <model-viewer 
+                                    class="model-viewer" 
+                                    src="${element.bohr_model_3d}" 
+                                    alt="3D model of ${element.name}" 
+                                    camera-controls 
+                                    auto-rotate 
+                                    ar 
+                                    shadow-intensity="1"
+                                    environment-image="neutral"
+                                    exposure="1.0"
+                                    camera-orbit="0deg 75deg 105%"
+                                    field-of-view="30deg">
+                                </model-viewer>
+                        `;
+                    }
+                    
+                    html += `
+                                <div class="element-symbol-3d">${element.symbol}</div>
+                            </div>
+                            
+                            <div class="controls">
+                                <button class="control-btn" id="reset-view">Reset View</button>
+                                <button class="control-btn" id="toggle-rotation">Pause Rotation</button>
+                                <button class="control-btn" id="toggle-symbol">Toggle Symbol</button>
+                            </div>
+                        </div>
+                    `;
+
+                    html += `
+                        <div class="info-panel">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Atomic Number</div>
+                                    <div class="info-value">${element.number}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Atomic Mass</div>
+                                    <div class="info-value">${element.atomic_mass}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Category</div>
+                                    <div class="info-value">${element.category}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Phase</div>
+                                    <div class="info-value">${element.phase}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Discovered By</div>
+                                    <div class="info-value">${element.discovered_by || 'N/A'}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Melting Point</div>
+                                    <div class="info-value">${element.melt ? element.melt + ' K' : 'N/A'}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Boiling Point</div>
+                                    <div class="info-value">${element.boil ? element.boil + ' K' : 'N/A'}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Density</div>
+                                    <div class="info-value">${element.density ? (element.phase === 'Gas' ? element.density + ' g/L' : element.density + ' g/cm³') : 'N/A'}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Electron Configuration</div>
+                                    <div class="info-value">${element.electron_configuration}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Electronegativity (Pauling)</div>
+                                    <div class="info-value">${element.electronegativity_pauling || 'N/A'}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item" style="margin-top: 20px;">
+                                <div class="info-label">Summary</div>
+                                <div class="info-value">${element.summary}</div>
+                            </div>
+                        </div>
+                    `;
+
+                    if (element.image && element.image.url) {
+                        html += `
+                            <div class="info-panel image-section">
+                                <div class="info-label">Image</div>
+                                <img src="${element.image.url}" alt="${element.image.title}">
+                                <div class="attribution">${element.image.attribution}</div>
+                            </div>
+                        `;
+                    }
+
+                    if (element.spectral_img) {
+                        html += `
+                            <div class="info-panel image-section">
+                                <div class="info-label">Spectral Image</div>
+                                <img src="${element.spectral_img}" alt="Spectral image of ${element.name}">
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <div class="info-panel">
+                            <p><a href="${element.source}" target="_blank" class="link">More information on Wikipedia</a></p>
+                        </div>
+                    `;
+
+                    document.getElementById('content').innerHTML = html;
+                    
+                    // Add interaction controls
+                    const modelViewer = document.querySelector('model-viewer');
+                    const resetBtn = document.getElementById('reset-view');
+                    const rotationBtn = document.getElementById('toggle-rotation');
+                    const symbolBtn = document.getElementById('toggle-symbol');
+                    const symbol3d = document.querySelector('.element-symbol-3d');
+                    
+                    if (modelViewer) {
+                        resetBtn.addEventListener('click', () => {
+                            modelViewer.cameraOrbit = '0deg 75deg 105%';
+                            modelViewer.fieldOfView = '30deg';
+                        });
+                        
+                        let rotationPaused = false;
+                        rotationBtn.addEventListener('click', () => {
+                            rotationPaused = !rotationPaused;
+                            modelViewer.autoRotate = !rotationPaused;
+                            rotationBtn.textContent = rotationPaused ? 'Resume Rotation' : 'Pause Rotation';
+                        });
+                        
+                        let symbolVisible = true;
+                        symbolBtn.addEventListener('click', () => {
+                            symbolVisible = !symbolVisible;
+                            symbol3d.style.opacity = symbolVisible ? '0.7' : '0';
+                            symbolBtn.textContent = symbolVisible ? 'Hide Symbol' : 'Show Symbol';
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON:', error);
+                    document.getElementById('content').innerHTML = '<div class="error">Error loading element data.</div>';
+                });
+        }
+    </script>
+</body>
+</html>
