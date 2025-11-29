@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
   <channel>
-    <title>Biology NEET Podcasts</title>
+    <title>EduHub Podcast Series</title>
     <link>https://razorpay.me/@eduhub-kmr</link>
     <description>Biology NEET Podcast is your go-to audio companion for mastering 
   biology concepts and cracking NEET with confidence! Whether you're on a walk, 
@@ -12,9 +12,9 @@
     <language>en-us</language>
 
     <!-- Add these two lines only ONCE at the channel level -->
-    <itunes:image href="https://i.ytimg.com/vi/QowCnnAWUQw/sddefault.jpg" />
+    <itunes:image href="https://edu-hubs.pages.dev/img/vidthumnail.jpg" />
     <image>
-      <url>https://i.ytimg.com/vi/QowCnnAWUQw/sddefault.jpg?alt=media</url>
+      <url>https://edu-hubs.pages.dev/img/vidthumnail.jpg?alt=media</url>
     </image>
   <item>
       <title>वो बेवफा है | ये इश्क नहीं धोखा है</title>
